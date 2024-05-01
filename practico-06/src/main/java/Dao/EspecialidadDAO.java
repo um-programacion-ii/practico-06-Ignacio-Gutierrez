@@ -1,4 +1,4 @@
-package Interfaces;
+package Dao;
 
 import Entidades.Especialidad;
 
