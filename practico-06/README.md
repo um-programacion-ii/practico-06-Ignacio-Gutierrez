@@ -53,4 +53,3 @@ Algunas funcionalidades pedidas
 . Se debe poder listar los médicos de una especialidad indicando la obra social que atienden
 
 . La cantidad y los medicamentos indicados en la Receta surgirán aleatoriamente siendo una opción no obtener una receta
-
