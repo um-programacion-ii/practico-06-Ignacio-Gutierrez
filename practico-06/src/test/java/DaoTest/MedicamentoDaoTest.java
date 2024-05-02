@@ -103,7 +103,7 @@ public class MedicamentoDaoTest {
         try {
             medicamentoDao.modificar(medicamentoModificado);
         } catch (IllegalArgumentException e) {
-            assertEquals("El alumno con id 4 no existe.", e.getMessage());
+            assertEquals("El medicamento con id 4 no existe.", e.getMessage());
         }
     }
 

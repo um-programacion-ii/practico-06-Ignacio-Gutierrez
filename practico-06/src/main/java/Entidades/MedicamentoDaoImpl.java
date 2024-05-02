@@ -4,6 +4,7 @@ import Dao.MedicamentoDAO;
 
 import java.util.*;
 
+
 public class MedicamentoDaoImpl implements MedicamentoDAO {
     private Map<Integer, Medicamento> medicamentos = new HashMap<>();
 
@@ -42,7 +43,7 @@ public class MedicamentoDaoImpl implements MedicamentoDAO {
         if (medicamentos.containsKey(medicamento.getId())) {
             medicamentos.put(medicamento.getId(), medicamento);
         } else {
-            throw new IllegalArgumentException("El alumno con id " + medicamento.getId() + " no existe.");
+            throw new IllegalArgumentException("El medicamento con id " + medicamento.getId() + " no existe.");
         }
     }
 }
