@@ -77,5 +77,26 @@ public class MedicamentoDaoImpl implements MedicamentoDAO {
         }
     }
 
+    @Override
+    public void agregarCantidadPorId(int id, int cantidad) {
+        Medicamento medicamento = medicamentos.get(id);
+        if (medicamento != null) {
+            int cantidadActual = medicamento.getCantidad();
+            medicamento.setCantidad(cantidadActual + cantidad);
+        } else {
+            throw new NoSuchElementException("No se encontró ningún medicamento con el ID especificado.");
+        }
+    }
+
+    @Override
+    public void agregarCantidadPorNombre(String nombre, int cantidad) {
+        Medicamento medicamento = buscarPorNombre(nombre);
+        if (medicamento != null) {
+            int cantidadActual = medicamento.getCantidad();
+            medicamento.setCantidad(cantidadActual + cantidad);
+        } else {
+            throw new NoSuchElementException("No se encontró ningún medicamento con el nombre especificado.");
+        }
+    }
 
 }

@@ -141,4 +141,22 @@ public class MedicamentoDaoTest {
 
         assertEquals(5, medicamentoDao.buscarPorId(1).getCantidad());
     }
+
+    @Test
+    public void agregarCantidadPorIdTest() {
+        Medicamento medicamento1 = new Medicamento(1,"Paracetamol", 10);
+        medicamentoDao.registrar(medicamento1);
+        medicamentoDao.agregarCantidadPorId(1, 5);
+
+        assertEquals(15, medicamentoDao.buscarPorId(1).getCantidad());
+    }
+
+    @Test
+    public void agregarCantidadPorNombreTest() {
+        Medicamento medicamento1 = new Medicamento(1,"Paracetamol", 10);
+        medicamentoDao.registrar(medicamento1);
+        medicamentoDao.agregarCantidadPorNombre("Paracetamol", 5);
+
+        assertEquals(15, medicamentoDao.buscarPorId(1).getCantidad());
+    }
 }
