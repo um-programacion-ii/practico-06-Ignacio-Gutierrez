@@ -24,7 +24,7 @@ public class MedicoDaoImpl implements MedicoDAO {
                 return medico;
             }
         }
-        throw new NoSuchElementException("No exite " + nombre + ".");
+        throw new NoSuchElementException("No existe " + nombre + ".");
     }
 
     @Override
@@ -34,7 +34,7 @@ public class MedicoDaoImpl implements MedicoDAO {
                 return medico;
             }
         }
-        throw new NoSuchElementException("No exite " + apellido + ".");
+        throw new NoSuchElementException("No existe " + apellido + ".");
     }
 
     @Override
@@ -44,7 +44,7 @@ public class MedicoDaoImpl implements MedicoDAO {
                 return medico;
             }
         }
-        throw new NoSuchElementException("No exite " + especialidad + ".");
+        throw new NoSuchElementException("No existe " + especialidad.getNombre() + ".");
     }
 
     @Override
@@ -54,7 +54,7 @@ public class MedicoDaoImpl implements MedicoDAO {
                 return medico;
             }
         }
-        throw new NoSuchElementException("No exite " + obraSocial + ".");
+        throw new NoSuchElementException("No existe " + obraSocial.getNombre() + ".");
     }
 
     @Override
