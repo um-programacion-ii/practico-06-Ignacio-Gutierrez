@@ -46,4 +46,36 @@ public class MedicamentoDaoImpl implements MedicamentoDAO {
             throw new IllegalArgumentException("El medicamento con id " + medicamento.getId() + " no existe.");
         }
     }
+
+    @Override
+    public void retirarCantidadPorId(int id, int cantidad) {
+        Medicamento medicamento = medicamentos.get(id);
+        if (medicamento != null) {
+            int cantidadActual = medicamento.getCantidad();
+            if (cantidadActual >= cantidad) {
+                medicamento.setCantidad(cantidadActual - cantidad);
+            } else {
+                throw new IllegalArgumentException("La cantidad a retirar es mayor que la cantidad disponible.");
+            }
+        } else {
+            throw new NoSuchElementException("No se encontró ningún medicamento con el ID especificado.");
+        }
+    }
+
+    @Override
+    public void retirarCantidadPorNombre(String nombre, int cantidad) {
+        Medicamento medicamento = buscarPorNombre(nombre);
+        if (medicamento != null) {
+            int cantidadActual = medicamento.getCantidad();
+            if (cantidadActual >= cantidad) {
+                medicamento.setCantidad(cantidadActual - cantidad);
+            } else {
+                throw new IllegalArgumentException("La cantidad a retirar es mayor que la cantidad disponible.");
+            }
+        } else {
+            throw new NoSuchElementException("No se encontró ningún medicamento con el nombre especificado.");
+        }
+    }
+
+
 }

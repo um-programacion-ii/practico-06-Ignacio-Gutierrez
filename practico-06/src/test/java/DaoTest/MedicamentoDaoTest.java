@@ -122,4 +122,23 @@ public class MedicamentoDaoTest {
         assertEquals(medicamento3, medicamentoDao.buscarPorId(3));
         assertEquals(3, medicamentoDao.listarTodos().size());
     }
+
+
+    @Test
+    public void retirarCantidadPorIdTest() {
+        Medicamento medicamento1 = new Medicamento(1,"Paracetamol", 10);
+        medicamentoDao.registrar(medicamento1);
+        medicamentoDao.retirarCantidadPorId(1, 5);
+
+        assertEquals(5, medicamentoDao.buscarPorId(1).getCantidad());
+    }
+
+    @Test
+    public void retirarCantidadPorNombreTest() {
+        Medicamento medicamento1 = new Medicamento(1,"Paracetamol", 10);
+        medicamentoDao.registrar(medicamento1);
+        medicamentoDao.retirarCantidadPorNombre("Paracetamol", 5);
+
+        assertEquals(5, medicamentoDao.buscarPorId(1).getCantidad());
+    }
 }
