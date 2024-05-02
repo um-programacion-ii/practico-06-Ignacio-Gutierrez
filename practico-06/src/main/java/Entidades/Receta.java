@@ -10,6 +10,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Receta {
+    private int id;
     private List<Medicamento> medicamentos;
     private Medico medico;
+    private Paciente paciente;
 }
