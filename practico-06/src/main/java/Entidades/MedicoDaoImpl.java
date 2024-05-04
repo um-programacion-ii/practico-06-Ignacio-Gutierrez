@@ -50,7 +50,7 @@ public class MedicoDaoImpl implements MedicoDAO {
     @Override
     public Medico buscarPorObraSocial(ObraSocial obraSocial) {
         for (Medico medico : medicos.values()) {
-            if (medico.getObraSocial().equals(obraSocial)) {
+            if (medico.getObrasSocialesAceptadas().contains(obraSocial)) {
                 return medico;
             }
         }
