@@ -11,5 +11,6 @@ public class Turno {
     private int id;
     private Paciente paciente;
     private Medico medico;
-    private ObraSocial obraSocial;
+    private Boolean particular;
+    private String EstadoTurno;
 }

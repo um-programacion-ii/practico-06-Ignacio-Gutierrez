@@ -2,6 +2,7 @@ package Entidades;
 
 import Dao.TurnoDAO;
 
+import javax.swing.text.StyledEditorKit;
 import java.util.*;
 
 public class TurnoDaoImpl implements TurnoDAO {
@@ -35,6 +36,26 @@ public class TurnoDaoImpl implements TurnoDAO {
             }
         }
         throw new NoSuchElementException("No existe " + medico.getNombre() + ".");
+    }
+
+    @Override
+    public Turno buscarPorEstado(String EstadoTurno) {
+        for (Turno turno : turnos.values()) {
+            if (turno.getEstadoTurno().equals(EstadoTurno)) {
+                return turno;
+            }
+        }
+        throw new NoSuchElementException("No hay turnos " + EstadoTurno + ".");
+    }
+
+    @Override
+    public Turno buscarPorParticular(Boolean particular) {
+        for (Turno turno : turnos.values()) {
+            if (turno.getParticular().equals(particular)) {
+                return turno;
+            }
+        }
+        throw new NoSuchElementException("No hay turnos " + particular + ".");
     }
 
     @Override

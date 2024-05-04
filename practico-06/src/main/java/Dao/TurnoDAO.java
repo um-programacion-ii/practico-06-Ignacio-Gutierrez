@@ -8,4 +8,8 @@ public interface TurnoDAO extends DAO<Turno>{
     Turno buscarPorMedico(Medico medico);
 
     Turno buscarPorPaciente(Paciente paciente);
+
+    Turno buscarPorEstado(String EstadoTurno);
+
+    Turno buscarPorParticular(Boolean particular);
 }
