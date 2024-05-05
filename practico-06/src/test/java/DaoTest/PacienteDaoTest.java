@@ -60,7 +60,7 @@ public class PacienteDaoTest {
     public void buscarPorNombreExisteTest() {
         Paciente paciente1 = new Paciente(1,"Juan","Perez",osde);
         pacienteDao.registrar(paciente1);
-        assertEquals(paciente1, pacienteDao.buscarPorNombre("Juan"));
+        assertEquals(paciente1, pacienteDao.buscarPorNombre("Juan").get(0));
 
     }
 
@@ -77,7 +77,7 @@ public class PacienteDaoTest {
     public void buscarPorApellidoExisteTest() {
         Paciente paciente1 = new Paciente(1,"Juan","Perez",osde);
         pacienteDao.registrar(paciente1);
-        assertEquals(paciente1, pacienteDao.buscarPorApellido("Perez"));
+        assertEquals(paciente1, pacienteDao.buscarPorApellido("Perez").get(0));
 
     }
 

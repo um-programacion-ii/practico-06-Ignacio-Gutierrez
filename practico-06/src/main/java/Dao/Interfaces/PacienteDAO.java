@@ -3,10 +3,12 @@ package Dao.Interfaces;
 import Entidades.ObraSocial;
 import Entidades.Paciente;
 
-public interface PacienteDAO extends DAO<Paciente>{
-    Paciente buscarPorNombre(String nombre);
+import java.util.List;
 
-    Paciente buscarPorApellido(String apellido);
+public interface PacienteDAO extends DAO<Paciente>{
+    List<Paciente> buscarPorNombre(String nombre);
+
+    List<Paciente> buscarPorApellido(String apellido);
 
     Paciente buscarPorObraSocial(ObraSocial obraSocial);
 }

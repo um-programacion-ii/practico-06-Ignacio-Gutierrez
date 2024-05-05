@@ -20,23 +20,31 @@ public class PacienteDaoImpl implements PacienteDAO {
     }
 
     @Override
-    public Paciente buscarPorNombre(String nombre) {
+    public List<Paciente> buscarPorNombre(String nombre) {
+        List<Paciente> pacientesConNombre = new ArrayList<>();
         for (Paciente paciente : pacientes.values()) {
             if (paciente.getNombre().equals(nombre)) {
-                return paciente;
+                pacientesConNombre.add(paciente);
             }
         }
-        throw new NoSuchElementException("No existe " + nombre + ".");
+        if (pacientesConNombre.isEmpty()) {
+            throw new NoSuchElementException("No existe " + nombre + ".");
+        }
+        return pacientesConNombre;
     }
 
     @Override
-    public Paciente buscarPorApellido(String apellido) {
+    public List<Paciente> buscarPorApellido(String apellido) {
+        List<Paciente> pacientesConApellido = new ArrayList<>();
         for (Paciente paciente : pacientes.values()) {
             if (paciente.getApellido().equals(apellido)) {
-                return paciente;
+                pacientesConApellido.add(paciente);
             }
         }
-        throw new NoSuchElementException("No existe " + apellido + ".");
+        if (pacientesConApellido.isEmpty()) {
+            throw new NoSuchElementException("No existe " + apellido + ".");
+        }
+        return pacientesConApellido;
     }
 
     @Override
