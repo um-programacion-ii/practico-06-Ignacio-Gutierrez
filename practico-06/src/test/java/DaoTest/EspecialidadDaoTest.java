@@ -2,7 +2,7 @@ package DaoTest;
 
 import Dao.EspecialidadDAO;
 import Entidades.Especialidad;
-import Entidades.EspecialidadDaoImp;
+import Entidades.EspecialidadDaoImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +17,7 @@ public class EspecialidadDaoTest {
 
     @BeforeEach
     public void setUp() {
-        especialidadDao = new EspecialidadDaoImp();
+        especialidadDao = new EspecialidadDaoImpl();
     }
 
     @Test

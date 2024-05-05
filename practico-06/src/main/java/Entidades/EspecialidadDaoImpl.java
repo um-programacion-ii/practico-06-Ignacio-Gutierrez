@@ -4,7 +4,7 @@ import Dao.EspecialidadDAO;
 
 import java.util.*;
 
-public class EspecialidadDaoImp implements EspecialidadDAO {
+public class EspecialidadDaoImpl implements EspecialidadDAO {
         private Map<Integer, Especialidad> especialidades =new HashMap<>();
 
     @Override
