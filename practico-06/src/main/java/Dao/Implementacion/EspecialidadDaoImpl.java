@@ -1,6 +1,7 @@
-package Entidades;
+package Dao.Implementacion;
 
-import Dao.EspecialidadDAO;
+import Dao.Interfaces.EspecialidadDAO;
+import Entidades.Especialidad;
 
 import java.util.*;
 

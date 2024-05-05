@@ -1,8 +1,8 @@
 package DaoTest;
 
-import Dao.EspecialidadDAO;
+import Dao.Interfaces.EspecialidadDAO;
 import Entidades.Especialidad;
-import Entidades.EspecialidadDaoImpl;
+import Dao.Implementacion.EspecialidadDaoImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,8 +1,8 @@
 package DaoTest;
 
-import Dao.MedicamentoDAO;
+import Dao.Interfaces.MedicamentoDAO;
 import Entidades.Medicamento;
-import Entidades.MedicamentoDaoImpl;
+import Dao.Implementacion.MedicamentoDaoImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

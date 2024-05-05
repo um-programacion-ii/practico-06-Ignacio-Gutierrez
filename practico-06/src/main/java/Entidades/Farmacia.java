@@ -1,5 +1,6 @@
 package Entidades;
 
+import Dao.Implementacion.MedicamentoDaoImpl;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

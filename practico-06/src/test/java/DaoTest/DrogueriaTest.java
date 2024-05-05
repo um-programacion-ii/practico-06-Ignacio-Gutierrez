@@ -2,7 +2,7 @@ package DaoTest;
 
 import Entidades.Drogueria;
 
-import Entidades.MedicamentoDaoImpl;
+import Dao.Implementacion.MedicamentoDaoImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

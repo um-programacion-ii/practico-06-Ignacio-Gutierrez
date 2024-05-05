@@ -1,6 +1,5 @@
-package Dao;
+package Dao.Interfaces;
 
-import Entidades.Especialidad;
 import Entidades.ObraSocial;
 
 public interface ObraSocialDAO extends DAO<ObraSocial>{

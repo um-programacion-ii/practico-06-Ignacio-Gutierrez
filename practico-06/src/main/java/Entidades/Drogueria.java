@@ -1,5 +1,7 @@
 package Entidades;
 
+import Dao.Implementacion.MedicamentoDaoImpl;
+
 public class Drogueria  {
     private MedicamentoDaoImpl medicamentoDaoImpl;
 

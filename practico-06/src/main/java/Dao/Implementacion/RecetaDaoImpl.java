@@ -1,6 +1,9 @@
-package Entidades;
+package Dao.Implementacion;
 
-import Dao.RecetaDAO;
+import Dao.Interfaces.RecetaDAO;
+import Entidades.Medico;
+import Entidades.Paciente;
+import Entidades.Receta;
 
 import java.util.*;
 

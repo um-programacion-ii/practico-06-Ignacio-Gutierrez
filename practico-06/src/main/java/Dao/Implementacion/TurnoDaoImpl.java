@@ -1,8 +1,10 @@
-package Entidades;
+package Dao.Implementacion;
 
-import Dao.TurnoDAO;
+import Dao.Interfaces.TurnoDAO;
+import Entidades.Medico;
+import Entidades.Paciente;
+import Entidades.Turno;
 
-import javax.swing.text.StyledEditorKit;
 import java.util.*;
 
 public class TurnoDaoImpl implements TurnoDAO {

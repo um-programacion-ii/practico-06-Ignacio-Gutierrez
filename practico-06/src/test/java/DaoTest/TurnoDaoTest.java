@@ -1,6 +1,7 @@
 package DaoTest;
 
-import Dao.TurnoDAO;
+import Dao.Implementacion.TurnoDaoImpl;
+import Dao.Interfaces.TurnoDAO;
 import Entidades.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

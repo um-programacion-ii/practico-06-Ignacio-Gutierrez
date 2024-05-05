@@ -1,6 +1,7 @@
 package DaoTest;
 
-import Dao.RecetaDAO;
+import Dao.Implementacion.RecetaDaoImpl;
+import Dao.Interfaces.RecetaDAO;
 import Entidades.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

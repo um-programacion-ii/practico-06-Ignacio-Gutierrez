@@ -1,7 +1,6 @@
-package Dao;
+package Dao.Interfaces;
 
 import Entidades.Especialidad;
-import Entidades.Medicamento;
 import Entidades.Medico;
 import Entidades.ObraSocial;
 

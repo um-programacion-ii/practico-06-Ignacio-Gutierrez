@@ -1,8 +1,8 @@
 package DaoTest;
 
-import Dao.ObraSocialDAO;
+import Dao.Interfaces.ObraSocialDAO;
 import Entidades.ObraSocial;
-import Entidades.ObraSocialDaoImpl;
+import Dao.Implementacion.ObraSocialDaoImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

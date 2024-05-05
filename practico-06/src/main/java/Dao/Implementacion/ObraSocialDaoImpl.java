@@ -1,6 +1,7 @@
-package Entidades;
+package Dao.Implementacion;
 
-import Dao.ObraSocialDAO;
+import Dao.Interfaces.ObraSocialDAO;
+import Entidades.ObraSocial;
 
 import java.util.*;
 

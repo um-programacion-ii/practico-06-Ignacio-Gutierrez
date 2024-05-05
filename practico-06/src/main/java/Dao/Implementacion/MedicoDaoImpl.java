@@ -1,6 +1,9 @@
-package Entidades;
+package Dao.Implementacion;
 
-import Dao.MedicoDAO;
+import Dao.Interfaces.MedicoDAO;
+import Entidades.Especialidad;
+import Entidades.Medico;
+import Entidades.ObraSocial;
 
 import java.util.*;
 
