@@ -66,9 +66,9 @@ public class ObraSocialDaoTest {
     @Test
     public void buscarPorNombreNoExisteTest() {
         try {
-            ObraSocial obraSocial1 = new ObraSocial(1,"OSDE");
+            obraSocialDao.buscarPorNombre("OSDE");
         } catch (NoSuchElementException e) {
-            assertEquals("No hay OSDE   .", e.getMessage());
+            assertEquals("No hay OSDE.", e.getMessage());
         }
     }
 

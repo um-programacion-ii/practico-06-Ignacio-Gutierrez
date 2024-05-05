@@ -67,7 +67,7 @@ public class EspecialidadDaoTest {
     @Test
     public void buscarPorNombreNoExisteTest() {
         try {
-            Especialidad especialidad = especialidadDao.buscarPorNombre("Dermatologia");
+            especialidadDao.buscarPorNombre("Dermatologia");
         } catch (NoSuchElementException e) {
             assertEquals("No hay Dermatologia.", e.getMessage());
         }

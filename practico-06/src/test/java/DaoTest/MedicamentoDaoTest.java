@@ -62,7 +62,7 @@ public class MedicamentoDaoTest {
     @Test
     public void buscarPorNombreNoExisteTest() {
         try {
-            Medicamento medicamento = medicamentoDao.buscarPorNombre("Paracetamol");
+            medicamentoDao.buscarPorNombre("Paracetamol");
         } catch (NoSuchElementException e) {
             assertEquals("No hay Paracetamol.", e.getMessage());
         }

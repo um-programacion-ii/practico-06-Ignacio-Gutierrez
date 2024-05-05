@@ -83,7 +83,7 @@ public class MedicoDaoTest {
     @Test
     public void buscarPorNombreNoExisteTest() {
         try {
-            Medico medico = medicoDao.buscarPorNombre("Juan");
+            medicoDao.buscarPorNombre("Juan");
         } catch (NoSuchElementException e) {
             assertEquals("No existe Juan.", e.getMessage());
         }
@@ -100,7 +100,7 @@ public class MedicoDaoTest {
     @Test
     public void buscarPorApellidoNoExisteTest() {
         try {
-            Medico medico = medicoDao.buscarPorApellido("Perez");
+            medicoDao.buscarPorApellido("Perez");
         } catch (NoSuchElementException e) {
             assertEquals("No existe Perez.", e.getMessage());
         }
@@ -117,7 +117,7 @@ public class MedicoDaoTest {
     @Test
     public void buscarPorEspecialidadNoExisteTest() {
         try {
-            Medico medico = medicoDao.buscarPorEspecialidad(dermatologia);
+            medicoDao.buscarPorEspecialidad(dermatologia);
         } catch (NoSuchElementException e) {
             assertEquals("No existe Dermatologia.", e.getMessage());
         }
@@ -134,7 +134,7 @@ public class MedicoDaoTest {
     @Test
     public void buscarPorObraSocialNoExisteTest() {
         try {
-            Medico medico = medicoDao.buscarPorObraSocial(osde);
+            medicoDao.buscarPorObraSocial(osde);
         } catch (NoSuchElementException e) {
             assertEquals("No existe OSDE.", e.getMessage());
         }

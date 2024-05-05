@@ -66,7 +66,7 @@ public class PacienteDaoTest {
     @Test
     public void buscarPorNombreNoExisteTest() {
         try {
-            Paciente paciente = pacienteDao.buscarPorNombre("Juan");
+            pacienteDao.buscarPorNombre("Juan");
         } catch (NoSuchElementException e) {
             assertEquals("No existe Juan.", e.getMessage());
         }
@@ -83,7 +83,7 @@ public class PacienteDaoTest {
     @Test
     public void buscarPorApellidoNoExisteTest() {
         try {
-            Paciente paciente = pacienteDao.buscarPorApellido("Perez");
+            pacienteDao.buscarPorApellido("Perez");
         } catch (NoSuchElementException e) {
             assertEquals("No existe Perez.", e.getMessage());
         }
@@ -100,7 +100,7 @@ public class PacienteDaoTest {
     @Test
     public void buscarPorObraSocialNoExisteTest() {
         try {
-            Paciente paciente = pacienteDao.buscarPorObraSocial(osde);
+            pacienteDao.buscarPorObraSocial(osde);
         } catch (NoSuchElementException e) {
             assertEquals("No existe OSDE.", e.getMessage());
         }

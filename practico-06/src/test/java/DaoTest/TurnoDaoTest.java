@@ -64,6 +64,7 @@ public class TurnoDaoTest {
         assertEquals(turno3, turnoDao.buscarPorId(3));
     }
 
+    @Test
     public void buscarPorIdTest() {
         Turno turno1 = new Turno(1, paciente1, medico1,true,"Pendiente");
         turnoDao.registrar(turno1);
