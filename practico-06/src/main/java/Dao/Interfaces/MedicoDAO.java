@@ -4,14 +4,12 @@ import Entidades.Especialidad;
 import Entidades.Medico;
 import Entidades.ObraSocial;
 
+import java.util.List;
+
 public interface MedicoDAO extends DAO<Medico>{
 
-    Medico buscarPorNombre(String nombre);
+    List<Medico> buscarPorEspecialidad(Especialidad especialidad);
 
-    Medico buscarPorApellido(String apellido);
-
-    Medico buscarPorEspecialidad(Especialidad especialidad);
-
-    Medico buscarPorObraSocial(ObraSocial obraSocial);
+    List<Medico> buscarPorObraSocial(ObraSocial obraSocial);
 
 }

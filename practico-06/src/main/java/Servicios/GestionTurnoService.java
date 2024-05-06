@@ -32,7 +32,7 @@ public class GestionTurnoService {
 
         return especialidades.get(seleccion - 1);
     }
-    
+
 
     public void darTurnoAPaciente(Paciente paciente, Medico medico, Boolean particular) {
         int cantidadTurnos = contenedorMemoria.getTurnoDao().listarTodos().size();

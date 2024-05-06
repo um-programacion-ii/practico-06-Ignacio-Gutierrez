@@ -74,44 +74,10 @@ public class MedicoDaoTest {
     }
 
     @Test
-    public void buscarPorNombreExisteTest() {
-        Medico medico1 = new Medico(1,"Juan","Perez",dermatologia,obrasSocialesAceptadasList1);
-        medicoDao.registrar(medico1);
-        assertEquals(medico1, medicoDao.buscarPorNombre("Juan"));
-
-    }
-
-    @Test
-    public void buscarPorNombreNoExisteTest() {
-        try {
-            medicoDao.buscarPorNombre("Juan");
-        } catch (NoSuchElementException e) {
-            assertEquals("No existe Juan.", e.getMessage());
-        }
-    }
-
-    @Test
-    public void buscarPorApellidoExisteTest() {
-        Medico medico1 = new Medico(1,"Juan","Perez",dermatologia,obrasSocialesAceptadasList1);
-        medicoDao.registrar(medico1);
-        assertEquals(medico1, medicoDao.buscarPorApellido("Perez"));
-
-    }
-
-    @Test
-    public void buscarPorApellidoNoExisteTest() {
-        try {
-            medicoDao.buscarPorApellido("Perez");
-        } catch (NoSuchElementException e) {
-            assertEquals("No existe Perez.", e.getMessage());
-        }
-    }
-
-    @Test
     public void buscarPorEspecialidadExisteTest() {
         Medico medico1 = new Medico(1,"Juan","Perez",dermatologia,obrasSocialesAceptadasList1);
         medicoDao.registrar(medico1);
-        assertEquals(medico1, medicoDao.buscarPorEspecialidad(dermatologia));
+        assertEquals(medico1, medicoDao.buscarPorEspecialidad(dermatologia).get(0));
 
     }
 
@@ -128,7 +94,7 @@ public class MedicoDaoTest {
     public void buscarPorObraSocialExisteTest() {
         Medico medico1 = new Medico(1,"Juan","Perez",dermatologia,obrasSocialesAceptadasList1);
         medicoDao.registrar(medico1);
-        assertEquals(medico1, medicoDao.buscarPorObraSocial(osde));
+        assertEquals(medico1, medicoDao.buscarPorObraSocial(osde).get(0));
 
     }
 

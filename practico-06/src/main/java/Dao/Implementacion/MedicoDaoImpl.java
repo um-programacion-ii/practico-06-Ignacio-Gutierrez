@@ -21,43 +21,31 @@ public class MedicoDaoImpl implements MedicoDAO {
     }
 
     @Override
-    public Medico buscarPorNombre(String nombre) {
-        for (Medico medico : medicos.values()) {
-            if (medico.getNombre().equals(nombre)) {
-                return medico;
-            }
-        }
-        throw new NoSuchElementException("No existe " + nombre + ".");
-    }
-
-    @Override
-    public Medico buscarPorApellido(String apellido) {
-        for (Medico medico : medicos.values()) {
-            if (medico.getApellido().equals(apellido)) {
-                return medico;
-            }
-        }
-        throw new NoSuchElementException("No existe " + apellido + ".");
-    }
-
-    @Override
-    public Medico buscarPorEspecialidad(Especialidad especialidad) {
+    public List<Medico> buscarPorEspecialidad(Especialidad especialidad) {
+        List<Medico> medicosConEspecialidad = new ArrayList<>();
         for (Medico medico : medicos.values()) {
             if (medico.getEspecialidad().equals(especialidad)) {
-                return medico;
+                medicosConEspecialidad.add(medico);
             }
         }
-        throw new NoSuchElementException("No existe " + especialidad.getNombre() + ".");
+        if (medicosConEspecialidad.isEmpty()) {
+            throw new NoSuchElementException("No existe " + especialidad.getNombre() + ".");
+        }
+        return medicosConEspecialidad;
     }
 
     @Override
-    public Medico buscarPorObraSocial(ObraSocial obraSocial) {
+    public List<Medico> buscarPorObraSocial(ObraSocial obraSocial) {
+        List<Medico> medicosConObraSocial = new ArrayList<>();
         for (Medico medico : medicos.values()) {
             if (medico.getObrasSocialesAceptadas().contains(obraSocial)) {
-                return medico;
+                medicosConObraSocial.add(medico);
             }
         }
-        throw new NoSuchElementException("No existe " + obraSocial.getNombre() + ".");
+        if (medicosConObraSocial.isEmpty()) {
+            throw new NoSuchElementException("No existe " + obraSocial.getNombre() + ".");
+        }
+        return medicosConObraSocial;
     }
 
     @Override
