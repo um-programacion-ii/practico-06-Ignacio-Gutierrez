@@ -31,6 +31,10 @@ public class GestionTurnoService {
         System.out.println("-Ingrese el número de la especialidad-");
         int seleccion = scanner.nextInt();
 
+        if (seleccion < 1 || seleccion > especialidades.size()) {
+            throw new IllegalArgumentException("Número de especialidad inválido");
+        }
+
         return especialidades.get(seleccion - 1);
     }
 
