@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 import org.mockito.Mockito;
 
@@ -105,4 +106,11 @@ public class RegistroDePacienteTest {
         assertEquals(pacienteNuevo, pacienteGuardado);
     }
 
+    @Test
+    public void getInstanciaTest() {
+        RegistroDePacientesService instancia1 = RegistroDePacientesService.getInstancia(contenedorMemoria);
+        RegistroDePacientesService instancia2 = RegistroDePacientesService.getInstancia(contenedorMemoria);
+
+        assertSame(instancia1, instancia2);
+    }
 }

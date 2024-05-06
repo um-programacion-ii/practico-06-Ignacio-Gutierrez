@@ -8,10 +8,18 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class RegistroDePacientesService {
+    private static RegistroDePacientesService instancia;
     private ContenedorMemoria contenedorMemoria;
 
     public RegistroDePacientesService(ContenedorMemoria contenedorMemoria) {
         this.contenedorMemoria = contenedorMemoria;
+    }
+
+    public static RegistroDePacientesService getInstancia(ContenedorMemoria contenedorMemoria) {
+        if (instancia == null) {
+            instancia = new RegistroDePacientesService(contenedorMemoria);
+        }
+        return instancia;
     }
 
     public Paciente buscarPacientePorNombreYApellido(String nombre, String apellido) {
