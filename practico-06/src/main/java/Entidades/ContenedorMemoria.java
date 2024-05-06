@@ -1,6 +1,5 @@
 package Entidades;
 
-import Dao.Implementacion.*;
 import Dao.Interfaces.*;
 
 import java.util.ArrayList;
@@ -13,6 +12,7 @@ public class ContenedorMemoria {
     private EspecialidadDAO especialidadDao;
     private MedicoDAO medicoDao;
     private PacienteDAO pacienteDao;
+    private TurnoDAO turnoDao;
 
     public ContenedorMemoria() {
 
@@ -197,4 +197,9 @@ public class ContenedorMemoria {
     public PacienteDAO getPacienteDao() {
         return this.pacienteDao;
     }
+
+    public TurnoDAO getTurnoDao() {
+        return this.turnoDao;
+    }
+
 }
