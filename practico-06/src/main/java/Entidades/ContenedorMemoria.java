@@ -14,14 +14,7 @@ public class ContenedorMemoria {
     private MedicoDAO medicoDao;
     private PacienteDAO pacienteDao;
 
-
     public ContenedorMemoria() {
-        this.medicamentoDao = new MedicamentoDaoImpl();
-        this.obraSocialDao = new ObraSocialDaoImpl();
-        this.especialidadDao = new EspecialidadDaoImpl();
-        this.medicoDao = new MedicoDaoImpl();
-        this.pacienteDao = new PacienteDaoImpl();
-
 
         //MEDICAMENTOS
         Medicamento paracetamol = new Medicamento(1,"Paracetamol", 10);
@@ -183,5 +176,25 @@ public class ContenedorMemoria {
         this.pacienteDao.registrar(martinSanchezPaciente);
         this.pacienteDao.registrar(sofiaAlvarezPaciente);
 
+    }
+
+    public MedicamentoDAO getMedicamentoDao() {
+        return this.medicamentoDao;
+    }
+
+    public ObraSocialDAO getObraSocialDao() {
+        return this.obraSocialDao;
+    }
+
+    public EspecialidadDAO getEspecialidadDao() {
+        return this.especialidadDao;
+    }
+
+    public MedicoDAO getMedicoDao() {
+        return this.medicoDao;
+    }
+
+    public PacienteDAO getPacienteDao() {
+        return this.pacienteDao;
     }
 }
