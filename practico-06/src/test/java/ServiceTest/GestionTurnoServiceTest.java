@@ -38,12 +38,31 @@ public class GestionTurnoServiceTest {
 
         Mockito.when(contenedorMemoria.getEspecialidadDao().listarTodos()).thenReturn(especialidades);
 
-        System.setIn(new ByteArrayInputStream("1".getBytes()));
+        ByteArrayInputStream in = new ByteArrayInputStream("1".getBytes());
+        System.setIn(in);
 
         Especialidad especialidadSeleccionada = gestionTurnoService.listarEspecialidades();
 
         assertEquals(especialidad1, especialidadSeleccionada);
     }
+
+    @Test
+    void listarEspecialidadesFueraDeRangoTest() {
+        Especialidad especialidad1 = new Especialidad(1,"Dermatologia");
+        Especialidad especialidad2 = new Especialidad(2,"Pediatría");
+        List<Especialidad> especialidades = Arrays.asList(especialidad1, especialidad2);
+
+        Mockito.when(contenedorMemoria.getEspecialidadDao().listarTodos()).thenReturn(especialidades);
+
+        ByteArrayInputStream in = new ByteArrayInputStream("0".getBytes());
+        System.setIn(in);
+        try {
+            gestionTurnoService.listarEspecialidades();
+        } catch (IllegalArgumentException e) {
+            assertEquals("Número de especialidad inválido", e.getMessage());
+        }
+    }
+
 
     @Test
     void listarMedicosPorEspecialidadNoExisteTest() {
@@ -63,6 +82,25 @@ public class GestionTurnoServiceTest {
 
     @Test
     void listarMedicosPorEspecialidadTest() {
+        Especialidad dermatologia = new Especialidad(1,"Dermatologia");
+
+        ObraSocial osde = new ObraSocial(1,"OSDE");
+        ObraSocial sanCorSalud = new ObraSocial(2,"SanCorSalud");
+        List<ObraSocial> obrasSocialesAceptadasList = Arrays.asList(osde, sanCorSalud);
+
+        Paciente paciente = new Paciente(1,"Juan","Perez",osde);
+        Medico medico1 = new Medico(1,"Juan","Perez",dermatologia,obrasSocialesAceptadasList);
+        Medico medico2 = new Medico(2,"Pedro","Gomez",dermatologia,obrasSocialesAceptadasList);
+        List<Medico> medicos = Arrays.asList(medico1, medico2);
+
+        Mockito.when(contenedorMemoria.getMedicoDao().buscarPorEspecialidad(dermatologia)).thenReturn(medicos);
+
+        ByteArrayInputStream in = new ByteArrayInputStream("1".getBytes());
+        System.setIn(in);
+
+        Medico medicoSeleccionado = gestionTurnoService.listarMedicosPorEspecialidad(dermatologia, paciente, false);
+
+        assertEquals(medico1, medicoSeleccionado);
     }
 
     @Test

@@ -27,8 +27,7 @@ public class GestionTurnoService {
             System.out.println((i + 1) + " - " + especialidades.get(i).getNombre());
         }
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Seleccione una especialidad: ");
-        System.out.println("-Ingrese el número de la especialidad-");
+        System.out.println("Ingrese el número de la especialidad seleccionada:");
         int seleccion = scanner.nextInt();
 
         if (seleccion < 1 || seleccion > especialidades.size()) {
@@ -57,7 +56,7 @@ public class GestionTurnoService {
         }
 
         for (int i = 0; i < medicosFiltrados.size(); i++) {
-            System.out.println((i + 1) + " - " + medicosFiltrados.get(i).getNombre());
+            System.out.println((i + 1) + " - " + medicosFiltrados.get(i).getNombre() + " " + medicosFiltrados.get(i).getApellido());
         }
 
         Scanner scanner = new Scanner(System.in);
