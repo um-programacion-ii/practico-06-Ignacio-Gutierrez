@@ -11,7 +11,7 @@ public class RegistroDePacientesService {
     private static RegistroDePacientesService instancia;
     private ContenedorMemoria contenedorMemoria;
 
-    public RegistroDePacientesService(ContenedorMemoria contenedorMemoria) {
+    private RegistroDePacientesService(ContenedorMemoria contenedorMemoria) {
         this.contenedorMemoria = contenedorMemoria;
     }
 

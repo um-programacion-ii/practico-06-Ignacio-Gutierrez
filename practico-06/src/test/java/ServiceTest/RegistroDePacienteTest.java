@@ -25,7 +25,7 @@ public class RegistroDePacienteTest {
         pacienteDaoImpl = Mockito.mock(PacienteDaoImpl.class);
         contenedorMemoria = Mockito.mock(ContenedorMemoria.class);
         Mockito.when(contenedorMemoria.getPacienteDao()).thenReturn(pacienteDaoImpl);
-        registroDePacientesService = new RegistroDePacientesService(contenedorMemoria);
+        registroDePacientesService = RegistroDePacientesService.getInstancia(contenedorMemoria);
     }
 
     @Test

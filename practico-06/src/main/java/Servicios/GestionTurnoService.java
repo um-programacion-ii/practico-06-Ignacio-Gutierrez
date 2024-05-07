@@ -10,7 +10,7 @@ public class GestionTurnoService {
     private static GestionTurnoService instancia;
     private ContenedorMemoria contenedorMemoria;
 
-    public GestionTurnoService(ContenedorMemoria contenedorMemoria) {
+    private GestionTurnoService(ContenedorMemoria contenedorMemoria) {
         this.contenedorMemoria = contenedorMemoria;
     }
 
