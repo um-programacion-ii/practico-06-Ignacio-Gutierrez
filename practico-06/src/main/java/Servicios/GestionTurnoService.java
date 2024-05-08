@@ -32,9 +32,9 @@ public class GestionTurnoService {
 
         if (seleccion < 1 || seleccion > especialidades.size()) {
             throw new IllegalArgumentException("Número de especialidad inválido");
+        } else {
+            return especialidades.get(seleccion - 1);
         }
-
-        return especialidades.get(seleccion - 1);
     }
 
     public Medico listarMedicosPorEspecialidad(Especialidad especialidad, Paciente paciente, Boolean particular) {
@@ -53,18 +53,23 @@ public class GestionTurnoService {
 
         if (medicosFiltrados.isEmpty()) {
             throw new RuntimeException("No hay médicos disponibles para la especialidad seleccionada");
+        } else {
+            for (int i = 0; i < medicosFiltrados.size(); i++) {
+                System.out.println((i + 1) + " - " + medicosFiltrados.get(i).getNombre() + " " + medicosFiltrados.get(i).getApellido());
+            }
+
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Seleccione un médico: ");
+            System.out.println("-Ingrese el número del médico-");
+            int seleccion = scanner.nextInt();
+
+            if (seleccion < 1 || seleccion > medicosFiltrados.size()) {
+                throw new IllegalArgumentException("Número de especialidad inválido");
+            } else {
+                return medicosFiltrados.get(seleccion - 1);
+            }
+
         }
-
-        for (int i = 0; i < medicosFiltrados.size(); i++) {
-            System.out.println((i + 1) + " - " + medicosFiltrados.get(i).getNombre() + " " + medicosFiltrados.get(i).getApellido());
-        }
-
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Seleccione un médico: ");
-        System.out.println("-Ingrese el número del médico-");
-        int seleccion = scanner.nextInt();
-
-        return medicosFiltrados.get(seleccion - 1);
     }
 
     public void darTurnoAPaciente(Paciente paciente, Medico medico, Boolean particular) {
