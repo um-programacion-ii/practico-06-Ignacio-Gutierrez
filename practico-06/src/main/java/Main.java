@@ -3,7 +3,7 @@ import Entidades.ContenedorMemoria;
 
 public class Main {
     public static void main(String[] args) {
-        ContenedorMemoria contenedorMemoria = new ContenedorMemoria();
+        //ontenedorMemoria contenedorMemoria = new ContenedorMemoria();
 
         AppPrograma appPrograma = new AppPrograma();
 

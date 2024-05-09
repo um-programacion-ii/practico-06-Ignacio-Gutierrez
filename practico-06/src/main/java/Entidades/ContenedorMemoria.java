@@ -8,12 +8,15 @@ import java.util.List;
 
 
 public class ContenedorMemoria {
-    private MedicamentoDAO medicamentoDao;
-    private ObraSocialDAO obraSocialDao;
-    private EspecialidadDAO especialidadDao;
-    private MedicoDAO medicoDao;
-    private PacienteDAO pacienteDao;
-    private TurnoDAO turnoDao;
+    private static ContenedorMemoria instance;
+
+    private MedicamentoDAO medicamentoDao = new MedicamentoDaoImpl();
+    private ObraSocialDAO obraSocialDao = new ObraSocialDaoImpl();
+    private EspecialidadDAO especialidadDao = new EspecialidadDaoImpl();
+    private MedicoDAO medicoDao = new MedicoDaoImpl();
+    private PacienteDAO pacienteDao = new PacienteDaoImpl();
+    private TurnoDAO turnoDao = new TurnoDaoImpl();
+    private RecetaDAO recetaDao = new RecetaDaoImpl();
 
     public ContenedorMemoria() {
 
@@ -179,6 +182,14 @@ public class ContenedorMemoria {
 
     }
 
+    public static ContenedorMemoria getInstance() {
+        if (instance == null) {
+            instance = new ContenedorMemoria();
+        }
+        return instance;
+    }
+
+
     public MedicamentoDAO getMedicamentoDao() {
         return this.medicamentoDao;
     }
@@ -201,6 +212,10 @@ public class ContenedorMemoria {
 
     public TurnoDAO getTurnoDao() {
         return this.turnoDao;
+    }
+
+    public RecetaDAO getRecetaDao() {
+        return this.recetaDao;
     }
 
 }
