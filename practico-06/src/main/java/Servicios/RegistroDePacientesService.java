@@ -33,11 +33,8 @@ public class RegistroDePacientesService {
                         return paciente;
                     }
                 }
-                throw new NoSuchElementException(apellido + ", " + nombre + " no se encuentra registrado en el sistema.");
-
-            } else {
-                throw new NoSuchElementException(apellido + ", " + nombre + " no se encuentra registrado en el sistema.");
             }
+            throw new NoSuchElementException(apellido + ", " + nombre + " no se encuentra registrado en el sistema.");
         } catch (NoSuchElementException e) {
             throw new NoSuchElementException(apellido + ", " + nombre + " no se encuentra registrado en el sistema.");
         }

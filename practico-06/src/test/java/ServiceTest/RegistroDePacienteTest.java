@@ -38,9 +38,9 @@ public class RegistroDePacienteTest {
         Paciente paciente2 = new Paciente(2, "Nicolas", "Perez", null);
         //Paciente paciente3 = new Paciente(1, "Juan", "Perez", null);
 
-        contenedorMemoria.getPacienteDao().registrar(paciente1);
-        contenedorMemoria.getPacienteDao().registrar(paciente2);
-        //contenedorMemoria.getPacienteDao().registrar(paciente3);
+        registroDePacientesService.registrarPaciente(paciente1);
+        registroDePacientesService.registrarPaciente(paciente2);
+        //registroDePacientesService.registrarPaciente(paciente3);
 
         Mockito.when(contenedorMemoria.getPacienteDao().buscarPorNombre("Juan")).thenReturn(Arrays.asList(paciente1));
         Mockito.when(contenedorMemoria.getPacienteDao().buscarPorApellido("Perez")).thenReturn(Arrays.asList(paciente2));
@@ -83,9 +83,9 @@ public class RegistroDePacienteTest {
         Paciente paciente2 = new Paciente(2, "Nicolas", "Perez", null);
         Paciente paciente3 = new Paciente(3, "Juan", "Perez", null);
 
-        contenedorMemoria.getPacienteDao().registrar(paciente1);
-        contenedorMemoria.getPacienteDao().registrar(paciente2);
-        contenedorMemoria.getPacienteDao().registrar(paciente3);
+        registroDePacientesService.registrarPaciente(paciente1);
+        registroDePacientesService.registrarPaciente(paciente2);
+        registroDePacientesService.registrarPaciente(paciente3);
 
         Mockito.when(contenedorMemoria.getPacienteDao().buscarPorNombre("Juan")).thenReturn(Arrays.asList(paciente1, paciente3));
         Mockito.when(contenedorMemoria.getPacienteDao().buscarPorApellido("Perez")).thenReturn(Arrays.asList(paciente2, paciente3));
@@ -93,20 +93,6 @@ public class RegistroDePacienteTest {
         Paciente resultado = registroDePacientesService.buscarPacientePorNombreYApellido("Juan", "Perez");
 
         assertEquals(paciente3, resultado);
-    }
-
-    @Test
-    public void registrarPacienteTest() {
-        Paciente pacienteNuevo = new Paciente(3, "Juan", "Perez", null);
-
-        contenedorMemoria.getPacienteDao().registrar(pacienteNuevo);
-
-        Mockito.when(contenedorMemoria.getPacienteDao().buscarPorNombre("Juan")).thenReturn(Arrays.asList(pacienteNuevo));
-        Mockito.when(contenedorMemoria.getPacienteDao().buscarPorApellido("Perez")).thenReturn(Arrays.asList(pacienteNuevo));
-
-        Paciente pacienteGuardado = registroDePacientesService.buscarPacientePorNombreYApellido("Juan", "Perez");
-
-        assertEquals(pacienteNuevo, pacienteGuardado);
     }
 
     @Test
