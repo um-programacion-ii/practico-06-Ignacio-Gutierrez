@@ -196,4 +196,9 @@ public class TurnoDaoTest {
         assertEquals(3, turnoDao.listarTodos().size());
     }
 
+    @Test
+    public void listarTodosVacioTest() {
+        assertEquals(0, turnoDao.listarTodos().size());
+    }
+
 }

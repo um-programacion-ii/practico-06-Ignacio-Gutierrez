@@ -105,6 +105,27 @@ public class GestionTurnoServiceTest {
     }
 
     @Test
+    void crearUnTurnoTest() {
+        Especialidad dermatologia = new Especialidad(1,"Dermatologia");
+
+        ObraSocial osde = new ObraSocial(1,"OSDE");
+        ObraSocial sanCorSalud = new ObraSocial(2,"SanCorSalud");
+        List<ObraSocial> obrasSocialesAceptadasList = Arrays.asList(osde, sanCorSalud);
+
+        Paciente paciente = new Paciente(1,"Juan","Perez",osde);
+        Medico medico1 = new Medico(1,"Juan","Perez",dermatologia,obrasSocialesAceptadasList);
+
+        Mockito.when(contenedorMemoria.getTurnoDao().listarTodos()).thenReturn(Collections.emptyList());
+
+
+        Turno turno1 = new Turno(1, paciente, medico1, false, "Pendiente");
+
+        gestionTurnoService.darTurnoAPaciente(paciente, medico1, false);
+
+        assertEquals(turno1, contenedorMemoria.getTurnoDao().listarTodos().get(0));
+    }
+
+    @Test
     void getInstanciaTest() {
         GestionTurnoService instancia1 = GestionTurnoService.getInstancia(contenedorMemoria);
         GestionTurnoService instancia2 = GestionTurnoService.getInstancia(contenedorMemoria);
