@@ -5,6 +5,7 @@ import Dao.Interfaces.MedicoDAO;
 import Dao.Interfaces.TurnoDAO;
 import Entidades.*;
 import Servicios.GestionTurnoService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -33,16 +34,15 @@ public class GestionTurnoServiceTest {
         Mockito.when(contenedorMemoria.getTurnoDao()).thenReturn(turnoDAO);
         Mockito.when(contenedorMemoria.getMedicoDao()).thenReturn(medicoDAO);
         gestionTurnoService = GestionTurnoService.getInstancia(contenedorMemoria);
+
+        Especialidad especialidad1 = new Especialidad(1,"Dermatologia");
+        Especialidad especialidad2 = new Especialidad(2,"Pediatría");
+        Mockito.when(contenedorMemoria.getEspecialidadDao().listarTodos()).thenReturn(List.of(especialidad1, especialidad2));
     }
 
     @Test
     void listarEspecialidadesTest() {
-        //Solo si se testea de forma individual verifica
         Especialidad especialidad1 = new Especialidad(1,"Dermatologia");
-        Especialidad especialidad2 = new Especialidad(2,"Pediatría");
-        List<Especialidad> especialidades = Arrays.asList(especialidad1, especialidad2);
-
-        Mockito.when(contenedorMemoria.getEspecialidadDao().listarTodos()).thenReturn(especialidades);
 
         ByteArrayInputStream in = new ByteArrayInputStream("1".getBytes());
         System.setIn(in);
@@ -54,17 +54,13 @@ public class GestionTurnoServiceTest {
 
     @Test
     void listarEspecialidadesFueraDeRangoTest() {
-        Especialidad especialidad1 = new Especialidad(1,"Dermatologia");
-        Especialidad especialidad2 = new Especialidad(2,"Pediatría");
-        List<Especialidad> especialidades = Arrays.asList(especialidad1, especialidad2);
+        Mockito.when(contenedorMemoria.getEspecialidadDao().listarTodos()).thenReturn(Collections.emptyList());
 
-        Mockito.when(contenedorMemoria.getEspecialidadDao().listarTodos()).thenReturn(especialidades);
-
-        ByteArrayInputStream in = new ByteArrayInputStream("0".getBytes());
+        ByteArrayInputStream in = new ByteArrayInputStream("4".getBytes());
         System.setIn(in);
         try {
             gestionTurnoService.listarEspecialidades();
-        } catch (IllegalArgumentException e) {
+        } catch (RuntimeException e) {
             assertEquals("Número de especialidad inválido", e.getMessage());
         }
     }
@@ -72,17 +68,15 @@ public class GestionTurnoServiceTest {
 
     @Test
     void listarMedicosPorEspecialidadNoExisteTest() {
-        //Solo si se testea de forma individual verifica
-        Especialidad especialidad = new Especialidad(1,"Dermatologia");
+
+        Especialidad dermatologia = new Especialidad(1,"Dermatologia");
         ObraSocial osde = new ObraSocial(1,"OSDE");
         Paciente paciente = new Paciente(1,"Juan","Perez",osde);
-        Boolean particular = true;
-        List<Medico> listaMedVacia = new ArrayList<>();
 
-        Mockito.when(contenedorMemoria.getMedicoDao().buscarPorEspecialidad(especialidad)).thenReturn(listaMedVacia);
+        Mockito.when(contenedorMemoria.getMedicoDao().buscarPorEspecialidad(Mockito.any(Especialidad.class))).thenReturn(new ArrayList<>());
 
         try {
-            gestionTurnoService.listarMedicosPorEspecialidad(especialidad, paciente, particular);
+            gestionTurnoService.listarMedicosPorEspecialidad(dermatologia, paciente, true);
         } catch (RuntimeException e) {
             assertEquals("No hay médicos disponibles para la especialidad seleccionada", e.getMessage());
         }
@@ -113,7 +107,6 @@ public class GestionTurnoServiceTest {
 
     @Test
     void darTurnoAPacienteTest() {
-        //Solo si se testea de forma individual verifica
         Especialidad dermatologia = new Especialidad(1,"Dermatologia");
 
         ObraSocial osde = new ObraSocial(1,"OSDE");

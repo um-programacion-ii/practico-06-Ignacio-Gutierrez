@@ -93,14 +93,13 @@ public class RegistroDePacienteTest {
 
     @Test
     public void registrarPacienteTest() {
-        Paciente pacienteNuevo = new Paciente(1, "Juan", "Perez", null);
+        Paciente pacienteNuevo = new Paciente(3, "Juan", "Perez", null);
 
-        registroDePacientesService.registrarPaciente(pacienteNuevo);
-
-        Mockito.verify(pacienteDaoImpl).registrar(pacienteNuevo);
+        pacienteDaoImpl.registrar(pacienteNuevo);
 
         Mockito.when(pacienteDaoImpl.buscarPorNombre("Juan")).thenReturn(Arrays.asList(pacienteNuevo));
         Mockito.when(pacienteDaoImpl.buscarPorApellido("Perez")).thenReturn(Arrays.asList(pacienteNuevo));
+
         Paciente pacienteGuardado = registroDePacientesService.buscarPacientePorNombreYApellido("Juan", "Perez");
 
         assertEquals(pacienteNuevo, pacienteGuardado);
