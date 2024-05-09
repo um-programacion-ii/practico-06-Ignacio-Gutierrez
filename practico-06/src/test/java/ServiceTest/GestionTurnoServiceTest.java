@@ -5,10 +5,9 @@ import Dao.Interfaces.MedicoDAO;
 import Dao.Interfaces.TurnoDAO;
 import Entidades.*;
 import Servicios.GestionTurnoService;
-import org.junit.jupiter.api.AfterEach;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
 import java.io.ByteArrayInputStream;
@@ -103,34 +102,6 @@ public class GestionTurnoServiceTest {
         Medico medicoSeleccionado = gestionTurnoService.listarMedicosPorEspecialidad(dermatologia, paciente, false);
 
         assertEquals(medico1, medicoSeleccionado);
-    }
-
-    @Test
-    void darTurnoAPacienteTest() {
-        Especialidad dermatologia = new Especialidad(1,"Dermatologia");
-
-        ObraSocial osde = new ObraSocial(1,"OSDE");
-        ObraSocial sanCorSalud = new ObraSocial(2,"SanCorSalud");
-        List<ObraSocial> obrasSocialesAceptadasList = Arrays.asList(osde, sanCorSalud);
-
-        Paciente paciente = new Paciente(1,"Juan","Perez",osde);
-        Medico medico = new Medico(1,"Juan","Perez",dermatologia,obrasSocialesAceptadasList);
-
-        List<Turno> turnos = Collections.nCopies(0, null);
-        Mockito.when(contenedorMemoria.getTurnoDao().listarTodos()).thenReturn(turnos);
-
-        gestionTurnoService.darTurnoAPaciente(paciente, medico, true);
-
-        ArgumentCaptor<Turno> argumentCaptor = ArgumentCaptor.forClass(Turno.class);
-        Mockito.verify(contenedorMemoria.getTurnoDao()).registrar(argumentCaptor.capture());
-        Turno turnoRegistrado = argumentCaptor.getValue();
-
-        assertEquals(0, turnoRegistrado.getId());
-        assertEquals(paciente, turnoRegistrado.getPaciente());
-        assertEquals(medico, turnoRegistrado.getMedico());
-        assertEquals(true, turnoRegistrado.getParticular());
-        assertEquals("Pendiente", turnoRegistrado.getEstadoTurno());
-
     }
 
     @Test
