@@ -23,17 +23,22 @@ public class GestionTurnoService {
 
     public Especialidad listarEspecialidades() {
         List<Especialidad> especialidades = contenedorMemoria.getEspecialidadDao().listarTodos();
-        for (int i = 0; i < especialidades.size(); i++) {
-            System.out.println((i + 1) + " - " + especialidades.get(i).getNombre());
-        }
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Ingrese el número de la especialidad seleccionada:");
-        int seleccion = scanner.nextInt();
 
-        if (seleccion < 1 || seleccion > especialidades.size()) {
-            throw new IllegalArgumentException("Número de especialidad inválido");
+        if (especialidades.isEmpty()) {
+            throw new RuntimeException("No hay especialidades disponibles");
         } else {
-            return especialidades.get(seleccion - 1);
+            for (int i = 0; i < especialidades.size(); i++) {
+                System.out.println((i + 1) + " - " + especialidades.get(i).getNombre());
+            }
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Ingrese el número de la especialidad seleccionada:");
+            int seleccion = scanner.nextInt();
+
+            if (seleccion < 1 || seleccion > especialidades.size()) {
+                throw new IllegalArgumentException("Número de especialidad inválido");
+            } else {
+                return especialidades.get(seleccion - 1);
+            }
         }
     }
 
@@ -41,19 +46,17 @@ public class GestionTurnoService {
         List<Medico> medicos = contenedorMemoria.getMedicoDao().buscarPorEspecialidad(especialidad);
         List<Medico> medicosFiltrados = new ArrayList<>();
 
-        if (particular) {
-            medicosFiltrados = medicos;
-        } else {
-            for (Medico medico : medicos) {
-                if (medico.getObrasSocialesAceptadas().contains(paciente.getObraSocial())) {
-                    medicosFiltrados.add(medico);
+        try {
+            if (particular) {
+                medicosFiltrados = medicos;
+            } else {
+                for (Medico medico : medicos) {
+                    if (medico.getObrasSocialesAceptadas().contains(paciente.getObraSocial())) {
+                        medicosFiltrados.add(medico);
+                    }
                 }
             }
-        }
 
-        if (medicosFiltrados.isEmpty()) {
-            throw new RuntimeException("No hay médicos disponibles para la especialidad seleccionada");
-        } else {
             for (int i = 0; i < medicosFiltrados.size(); i++) {
                 System.out.println((i + 1) + " - " + medicosFiltrados.get(i).getNombre() + " " + medicosFiltrados.get(i).getApellido());
             }
@@ -68,8 +71,11 @@ public class GestionTurnoService {
             } else {
                 return medicosFiltrados.get(seleccion - 1);
             }
-
         }
+        catch (Exception e) {
+            System.out.println("No hay médicos disponibles para la especialidad seleccionada");
+        }
+        return null;
     }
 
     public void darTurnoAPaciente(Paciente paciente, Medico medico, Boolean particular) {
