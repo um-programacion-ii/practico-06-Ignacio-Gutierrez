@@ -1,5 +1,6 @@
 package Entidades;
 
+import Dao.Implementacion.*;
 import Dao.Interfaces.*;
 
 import java.util.ArrayList;
@@ -7,12 +8,12 @@ import java.util.List;
 
 
 public class ContenedorMemoria {
-    private MedicamentoDAO medicamentoDao;
-    private ObraSocialDAO obraSocialDao;
-    private EspecialidadDAO especialidadDao;
-    private MedicoDAO medicoDao;
-    private PacienteDAO pacienteDao;
-    private TurnoDAO turnoDao;
+    private MedicamentoDAO medicamentoDao = new MedicamentoDaoImpl();
+    private ObraSocialDAO obraSocialDao = new ObraSocialDaoImpl();
+    private EspecialidadDAO especialidadDao = new EspecialidadDaoImpl();
+    private MedicoDAO medicoDao = new MedicoDaoImpl();
+    private PacienteDAO pacienteDao = new PacienteDaoImpl();
+    private TurnoDAO turnoDao = new TurnoDaoImpl();
 
     public ContenedorMemoria() {
 
