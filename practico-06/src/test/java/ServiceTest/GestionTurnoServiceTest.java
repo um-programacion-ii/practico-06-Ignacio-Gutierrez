@@ -1,5 +1,6 @@
 package ServiceTest;
 
+import Dao.Implementacion.TurnoDaoImpl;
 import Dao.Interfaces.EspecialidadDAO;
 import Dao.Interfaces.MedicoDAO;
 import Dao.Interfaces.TurnoDAO;
@@ -117,12 +118,13 @@ public class GestionTurnoServiceTest {
 
         Mockito.when(contenedorMemoria.getTurnoDao().listarTodos()).thenReturn(Collections.emptyList());
 
-
         Turno turno1 = new Turno(1, paciente, medico1, false, "Pendiente");
+
+        Mockito.when(contenedorMemoria.getTurnoDao().buscarPorId(1)).thenReturn(turno1);
 
         gestionTurnoService.darTurnoAPaciente(paciente, medico1, false);
 
-        assertEquals(turno1, contenedorMemoria.getTurnoDao().listarTodos().get(0));
+        assertEquals(turno1, contenedorMemoria.getTurnoDao().buscarPorId(1));
     }
 
     @Test
