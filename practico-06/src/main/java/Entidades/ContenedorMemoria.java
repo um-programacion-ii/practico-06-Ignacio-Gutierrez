@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
 public class ContenedorMemoria {
     private static ContenedorMemoria instance;
 
@@ -21,29 +22,29 @@ public class ContenedorMemoria {
     public ContenedorMemoria() {
 
         //MEDICAMENTOS
-        Medicamento paracetamol = new Medicamento(1,"Paracetamol", 10);
-        Medicamento ibuprofeno = new Medicamento(2,"Ibuprofeno", 20);
-        Medicamento omeprazol = new Medicamento(3,"Omeprazol", 30);
-        Medicamento aspirina = new Medicamento(4,"Aspirina", 40);
-        Medicamento amoxicilina = new Medicamento(5,"Amoxicilina", 50);
-        Medicamento ciprofloxacino = new Medicamento(6,"Ciprofloxacino", 60);
-        Medicamento metformina = new Medicamento(7,"Metformina", 70);
-        Medicamento losartan = new Medicamento(8,"Losartan", 80);
-        Medicamento atorvastatina = new Medicamento(9,"Atorvastatina", 90);
-        Medicamento sertralina = new Medicamento(10,"Sertralina", 100);
-        Medicamento loratadina = new Medicamento(11,"Loratadina", 110);
-        Medicamento diazepam = new Medicamento(12,"Diazepam", 120);
-        Medicamento warfarina = new Medicamento(13,"Warfarina", 130);
-        Medicamento metoprolol = new Medicamento(14,"Metoprolol", 140);
-        Medicamento clopidogrel = new Medicamento(15,"Clopidogrel", 150);
-        Medicamento rosuvastatina = new Medicamento(16,"Rosuvastatina", 160);
-        Medicamento pantoprazol = new Medicamento(17,"Pantoprazol", 170);
-        Medicamento enalapril = new Medicamento(18,"Enalapril", 180);
-        Medicamento losartán = new Medicamento(19,"Losartán", 190);
-        Medicamento peróxidoDeBenzoilo = new Medicamento(21,"Peróxido de Benzoilo", 210);
-        Medicamento tretinoína = new Medicamento(22,"Tretinoína", 220);
-        Medicamento hidroquinona = new Medicamento(23,"Hidroquinona", 230);
-        Medicamento ácidoSalicílico = new Medicamento(24,"Ácido Salicílico", 240);
+        Medicamento paracetamol = new Medicamento(1,"Paracetamol", 0);
+        Medicamento ibuprofeno = new Medicamento(2,"Ibuprofeno", 0);
+        Medicamento omeprazol = new Medicamento(3,"Omeprazol", 0);
+        Medicamento aspirina = new Medicamento(4,"Aspirina", 0);
+        Medicamento amoxicilina = new Medicamento(5,"Amoxicilina", 0);
+        Medicamento ciprofloxacino = new Medicamento(6,"Ciprofloxacino", 0);
+        Medicamento metformina = new Medicamento(7,"Metformina", 0);
+        Medicamento losartan = new Medicamento(8,"Losartan", 0);
+        Medicamento atorvastatina = new Medicamento(9,"Atorvastatina", 0);
+        Medicamento sertralina = new Medicamento(10,"Sertralina", 0);
+        Medicamento loratadina = new Medicamento(11,"Loratadina", 0);
+        Medicamento diazepam = new Medicamento(12,"Diazepam", 0);
+        Medicamento warfarina = new Medicamento(13,"Warfarina", 0);
+        Medicamento metoprolol = new Medicamento(14,"Metoprolol", 0);
+        Medicamento clopidogrel = new Medicamento(15,"Clopidogrel", 0);
+        Medicamento rosuvastatina = new Medicamento(16,"Rosuvastatina", 0);
+        Medicamento pantoprazol = new Medicamento(17,"Pantoprazol", 0);
+        Medicamento enalapril = new Medicamento(18,"Enalapril", 0);
+        Medicamento losartán = new Medicamento(19,"Losartán", 0);
+        Medicamento peróxidoDeBenzoilo = new Medicamento(21,"Peróxido de Benzoilo", 0);
+        Medicamento tretinoína = new Medicamento(22,"Tretinoína", 0);
+        Medicamento hidroquinona = new Medicamento(23,"Hidroquinona", 0);
+        Medicamento ácidoSalicílico = new Medicamento(24,"Ácido Salicílico", 0);
 
 
         this.medicamentoDao.registrar(paracetamol);

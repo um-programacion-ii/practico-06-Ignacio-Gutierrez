@@ -3,9 +3,7 @@ package Entidades;
 import Dao.Interfaces.*;
 import Servicios.*;
 
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
+import java.util.*;
 
 public class AppPrograma {
     public void iniciar() {
@@ -79,9 +77,85 @@ public class AppPrograma {
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
             ////////////////////////////////////////// Turno de Paciente ///////////////////////////////////////////////
+            System.out.println("\nIngrese 'Si' para iniciar la consulta u 'Otro' para finalizar el programa");
+            String respuesta1 = scanner.nextLine();
+            if (respuesta1.equals("Si")) {
+                Turno turnoActualizado = atencionMedicoService.iniciarConsulta(turnoDelUsuario);
 
+                Random random = new Random();
+                Boolean generarReceta = random.nextBoolean();
+                if (generarReceta) {
 
+                    //Lista de medicamentos para la receta
+                    List<Medicamento> todosLosMedicamentos = contenedorMemoria.getMedicamentoDao().listarTodos();
+
+                    List<Medicamento> medicamentosReceta = new ArrayList<>();
+                    for (Medicamento medicamento : todosLosMedicamentos) {
+                        int cantidad = random.nextInt(5) + 1;
+                        medicamentosReceta.add(new Medicamento(medicamento.getId(), medicamento.getNombre(), cantidad));
+                    }
+
+                    int cantidadMedicamentos = random.nextInt(2) + 1;
+                    List<Medicamento> medicamentosSeleccionados = new ArrayList<>();
+
+                    for (int i = 0; i < cantidadMedicamentos; i++) {
+                        if (!medicamentosReceta.isEmpty()) {
+                            int indiceAleatorio = random.nextInt(medicamentosReceta.size());
+                            Medicamento medicamentoSeleccionado = medicamentosReceta.get(indiceAleatorio);
+                            medicamentosSeleccionados.add(medicamentoSeleccionado);
+                            medicamentosReceta.remove(indiceAleatorio);
+                        }
+                    }
+                    Receta recetaGenerada = atencionMedicoService.generarReceta(turnoActualizado, medicamentosSeleccionados);
+                    System.out.println("Receta generada exitosamente!");
+                    System.out.println("Recuerde el id de su receta, para comprar los medicamentos:" + recetaGenerada.getId());
+                    System.out.println(recetaGenerada);
+                } else {
+                    System.out.println("No se generará receta");
+                }
+
+                atencionMedicoService.finalizarConsulta(turnoActualizado);
+            }
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ////////////////////////////////////////// Turno de Paciente ///////////////////////////////////////////////
+
+            System.out.println("\nIngrese 'Si' para comprar medicamentos u 'Otro' para finalizar el programa");
+            String respuesta2 = scanner.nextLine();
+            if (respuesta2.equals("Si")) {
+                try {
+                    System.out.println("Ingrese el id de su Receta: ");
+                    String idRecetaPacienteString = scanner.nextLine();
+                    int idRecetaPaciente = Integer.parseInt(idRecetaPacienteString);
+
+                    Receta recetaGenerada = recetaDAO.buscarPorId(idRecetaPaciente);
+                    Turno turnoFinalizado = turnoDAO.buscarPorId(turnoDelUsuario.getId());
+
+                    gestionFarmaciaService.compraDeMedicamentos(recetaGenerada, turnoFinalizado);
+
+                } catch (Exception e) {
+                } finally {
+                    for (Medicamento medicamento : contenedorMemoria.getMedicamentoDao().listarTodos()) {
+                        System.out.println("Id: " + medicamento.getId() + " - Medicamento: " + medicamento.getNombre() + " - Cantidad: " + medicamento.getCantidad());
+                    }
+                }
+            }
+
+            System.out.println("\nIngrese 'Si' para seguir en el sistema u 'Otro' para finalizar el programa");
+
+            String respuesta3 = scanner.nextLine();
+            if (respuesta3.equals("Si")) {
+                estadoPrograma = "Activo";
+            } else {
+                estadoPrograma = "Exit";
+            }
         }
-        ////////OJALA LO PUEDA TERMINAR
     }
+
+    public void finalizar() {
+        System.out.println("\n|-------------------------------------------------|");
+        System.out.println("|   Finalizó su estadía en el Servicio de Salud!  |");
+        System.out.println("|-------------------------------------------------|");
+    }
+
 }

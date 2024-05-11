@@ -6,7 +6,7 @@ public interface MedicamentoDAO extends DAO<Medicamento>{
 
     Medicamento buscarPorNombre(String nombre);
 
-    void retirarCantidadPorId(int id, int cantidad); // Nuevo método
+    void retirarCantidadPorId(int id, int cantidad);
 
     void retirarCantidadPorNombre(String nombre, int cantidad);
 
