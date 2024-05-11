@@ -25,7 +25,7 @@ public class GestionDrogueriaServiceTest {
     @Test
     public void solicitarMedicamentoPorIdTest() {
         gestionDrogueriaService.solicitarMedicamentoPorId(1);
-        Mockito.verify(contenedorMemoria.getMedicamentoDao(), Mockito.times(1)).agregarCantidadPorId(1, 500);
+        Mockito.verify(contenedorMemoria.getMedicamentoDao()).agregarCantidadPorId(1, 500);
     }
 
     @Test
