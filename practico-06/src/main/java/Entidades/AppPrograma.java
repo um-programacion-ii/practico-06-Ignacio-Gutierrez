@@ -30,38 +30,58 @@ public class AppPrograma {
         GestionFarmaciaService gestionFarmaciaService = GestionFarmaciaService.getInstancia(contenedorMemoria);
         GestionDrogueriaService gestionDrogueriaService = GestionDrogueriaService.getInstancia(contenedorMemoria);
 
-        Scanner scanner = new Scanner(System.in);
+        String estadoPrograma = "Activo";
 
-        System.out.println("Ingrese su nombre: ");
-        String nombre = scanner.nextLine();
+        while (estadoPrograma != "Exit") {
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////// Registro De Pacientes /////////////////////////////////////////////
+            Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Ingrese su apellido: ");
-        String apellido = scanner.nextLine();
+            System.out.println("Ingrese su nombre: ");
+            String nombre = scanner.nextLine();
 
-        try {
-            Paciente paciente = registroDePacientesService.buscarPacientePorNombreYApellido(nombre, apellido);
-            System.out.println("Paciente encontrado: " + paciente.getNombre() + " " + paciente.getApellido());
-        } catch (NoSuchElementException e) {
-            System.out.println("Paciente no encontrado");
-            System.out.println("Lo registraremos en el sistema...\n");
-            ObraSocial obraSocialDelPaciente = registroDePacientesService.seleccionarObraSocial();
+            System.out.println("Ingrese su apellido: ");
+            String apellido = scanner.nextLine();
 
-            int idPaciente = pacienteDAO.listarTodos().size() + 1;
+            try {
+                Paciente pacienteUsuario = registroDePacientesService.buscarPacientePorNombreYApellido(nombre, apellido);
+                System.out.println("Paciente encontrado: " + pacienteUsuario.getNombre() + " " + pacienteUsuario.getApellido());
+            } catch (NoSuchElementException e) {
+                System.out.println("Paciente no encontrado");
+                System.out.println("Lo registraremos en el sistema...\n");
+                ObraSocial obraSocialDelPaciente = registroDePacientesService.seleccionarObraSocial();
 
-            Paciente pacienteNuevo = new Paciente(idPaciente, nombre, apellido, obraSocialDelPaciente);
-            registroDePacientesService.registrarPaciente(pacienteNuevo);
+                int idPaciente = pacienteDAO.listarTodos().size() + 1;
 
-            System.out.println("Paciente registrado exitosamente!");
+                Paciente pacienteUsuario = new Paciente(idPaciente, nombre, apellido, obraSocialDelPaciente);
+                registroDePacientesService.registrarPaciente(pacienteUsuario);
+
+                System.out.println("Paciente registrado exitosamente!");
+            }
+
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ////////////////////////////////////////// Turno de Paciente ///////////////////////////////////////////////
+            System.out.println("\nSeleccione la especialidad de la consulta:");
+            Especialidad especialidadSeleccionada = gestionTurnoService.listarEspecialidades();
+
+            Boolean particularSiONo = gestionTurnoService.seleccionarTipoTurno();
+
+            Paciente pacienteUsuario = registroDePacientesService.buscarPacientePorNombreYApellido(nombre, apellido);
+
+            Medico medicoSeleccionada = gestionTurnoService.listarMedicosPorEspecialidad(especialidadSeleccionada, pacienteUsuario, particularSiONo);
+
+            Turno turnoDelUsuario = gestionTurnoService.darTurnoAPaciente(pacienteUsuario, medicoSeleccionada, particularSiONo);
+
+            System.out.println(turnoDelUsuario);
+            System.out.println("Turno asignado exitosamente!");
+
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ////////////////////////////////////////// Turno de Paciente ///////////////////////////////////////////////
+
+
         }
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-    }
-    ////////OJALA LO PUEDA TERMINAR
-    public void finalizar() {
-        System.out.println("\n|----------------------------------------|");
-        System.out.println("| Gracias por usar el Servicio de Salud! |");
-        System.out.println("|----------------------------------------|");
+        ////////OJALA LO PUEDA TERMINAR
     }
 }

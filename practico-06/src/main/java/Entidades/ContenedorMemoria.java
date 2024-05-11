@@ -71,10 +71,11 @@ public class ContenedorMemoria {
         this.medicamentoDao.registrar(ácidoSalicílico);
 
         //OBRAS SOCIALES
-        ObraSocial osde = new ObraSocial(1,"OSDE");
-        ObraSocial sanCorSalud = new ObraSocial(2,"SanCor Salud");
-        ObraSocial swissMedical = new ObraSocial(3,"Swiss Medical");
-        ObraSocial galeno = new ObraSocial(4,"Galeno");
+        ObraSocial ninguna = new ObraSocial(1,"Ninguna");
+        ObraSocial osde = new ObraSocial(2,"OSDE");
+        ObraSocial sanCorSalud = new ObraSocial(3,"SanCor Salud");
+        ObraSocial swissMedical = new ObraSocial(4,"Swiss Medical");
+        ObraSocial galeno = new ObraSocial(5,"Galeno");
 
         this.obraSocialDao.registrar(osde);
         this.obraSocialDao.registrar(sanCorSalud);
@@ -89,7 +90,7 @@ public class ContenedorMemoria {
         Especialidad hematología = new Especialidad(5, "Hematología");
         Especialidad infectología = new Especialidad(6, "Infectología");
         Especialidad neumonología = new Especialidad(8, "Neumonología");
-        Especialidad medicoGeneral = new Especialidad(9, null);
+        Especialidad medicoGeneral = new Especialidad(9, "Medico General");
 
         this.especialidadDao.registrar(cardiología);
         this.especialidadDao.registrar(dermatología);
@@ -164,7 +165,7 @@ public class ContenedorMemoria {
         Paciente anaMartinezPaciente = new Paciente(4, "Ana", "Martinez", galeno);
         Paciente pedroRodriguezPaciente = new Paciente(5, "Pedro", "Rodriguez", osde);
         Paciente lauraGarciaPaciente = new Paciente(6, "Laura", "Garcia", sanCorSalud);
-        Paciente diegoFernandezPaciente = new Paciente(7, "Diego", "Fernandez", swissMedical);
+        Paciente diegoFernandezPaciente = new Paciente(7, "Diego", "Fernandez", ninguna);
         Paciente luciaDiazPaciente = new Paciente(8, "Lucia", "Diaz", galeno);
         Paciente martinSanchezPaciente = new Paciente(9, "Martin", "Sanchez", osde);
         Paciente sofiaAlvarezPaciente = new Paciente(10, "Sofia", "Alvarez", sanCorSalud);
