@@ -21,43 +21,59 @@ public class TurnoDaoImpl implements TurnoDAO {
     }
 
     @Override
-    public Turno buscarPorPaciente(Paciente paciente) {
+    public List<Turno> buscarPorPaciente(Paciente paciente) {
+        List<Turno> turnoPorPaciente = new ArrayList<>();
         for (Turno turno : turnos.values()) {
             if (turno.getPaciente().equals(paciente)) {
-                return turno;
+                turnoPorPaciente.add(turno);
             }
         }
-        throw new NoSuchElementException("No existe " + paciente.getNombre() + ".");
+        if (turnoPorPaciente.isEmpty()) {
+            throw new NoSuchElementException("No existe " + paciente.getNombre() + ".");
+        }
+        return turnoPorPaciente;
     }
 
     @Override
-    public Turno buscarPorMedico(Medico medico) {
+    public List<Turno> buscarPorMedico(Medico medico) {
+        List<Turno> turnoPorMedico = new ArrayList<>();
         for (Turno turno : turnos.values()) {
             if (turno.getMedico().equals(medico)) {
-                return turno;
+                turnoPorMedico.add(turno);
             }
         }
-        throw new NoSuchElementException("No existe " + medico.getNombre() + ".");
+        if (turnoPorMedico.isEmpty()) {
+            throw new NoSuchElementException("No existe " + medico.getNombre() + ".");
+        }
+        return turnoPorMedico;
     }
 
     @Override
-    public Turno buscarPorEstado(String EstadoTurno) {
+    public List<Turno> buscarPorEstado(String EstadoTurno) {
+        List<Turno> turnoPorEstado = new ArrayList<>();
         for (Turno turno : turnos.values()) {
             if (turno.getEstadoTurno().equals(EstadoTurno)) {
-                return turno;
+                turnoPorEstado.add(turno);
             }
         }
-        throw new NoSuchElementException("No hay turnos " + EstadoTurno + ".");
+        if (turnoPorEstado.isEmpty()) {
+            throw new NoSuchElementException("No hay turnos " + EstadoTurno + ".");
+        }
+        return turnoPorEstado;
     }
 
     @Override
-    public Turno buscarPorParticular(Boolean particular) {
+    public List<Turno> buscarPorParticular(Boolean particular) {
+        List<Turno> turnoPorParticular = new ArrayList<>();
         for (Turno turno : turnos.values()) {
             if (turno.getParticular().equals(particular)) {
-                return turno;
+                turnoPorParticular.add(turno);
             }
         }
-        throw new NoSuchElementException("No hay turnos " + particular + ".");
+        if (turnoPorParticular.isEmpty()) {
+            throw new NoSuchElementException("No hay turnos " + particular + ".");
+        }
+        return turnoPorParticular;
     }
 
     @Override

@@ -4,12 +4,14 @@ import Entidades.Medico;
 import Entidades.Paciente;
 import Entidades.Turno;
 
+import java.util.List;
+
 public interface TurnoDAO extends DAO<Turno>{
-    Turno buscarPorMedico(Medico medico);
+    List<Turno> buscarPorMedico(Medico medico);
 
-    Turno buscarPorPaciente(Paciente paciente);
+    List<Turno> buscarPorPaciente(Paciente paciente);
 
-    Turno buscarPorEstado(String EstadoTurno);
+    List<Turno> buscarPorEstado(String EstadoTurno);
 
-    Turno buscarPorParticular(Boolean particular);
+    List<Turno> buscarPorParticular(Boolean particular);
 }

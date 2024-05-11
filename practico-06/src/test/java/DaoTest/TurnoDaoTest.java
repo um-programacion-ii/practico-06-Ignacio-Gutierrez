@@ -77,7 +77,7 @@ public class TurnoDaoTest {
     public void buscarPorPacienteExisteTest() {
         Turno turno1 = new Turno(1, paciente1, medico1,true,"Pendiente");
         turnoDao.registrar(turno1);
-        assertEquals(turno1, turnoDao.buscarPorPaciente(paciente1));
+        assertEquals(turno1, turnoDao.buscarPorPaciente(paciente1).get(0));
     }
 
     @Test
@@ -93,7 +93,7 @@ public class TurnoDaoTest {
     public void buscarPorMedicoExisteTest() {
         Turno turno1 = new Turno(1, paciente1, medico1,true,"Pendiente");
         turnoDao.registrar(turno1);
-        assertEquals(turno1, turnoDao.buscarPorMedico(medico1));
+        assertEquals(turno1, turnoDao.buscarPorMedico(medico1).get(0));
 
     }
 
@@ -110,7 +110,7 @@ public class TurnoDaoTest {
     public void buscarPorEstadoExisteTest() {
         Turno turno1 = new Turno(1, paciente1, medico1,true,"Pendiente");
         turnoDao.registrar(turno1);
-        assertEquals(turno1, turnoDao.buscarPorEstado("Pendiente"));
+        assertEquals(turno1, turnoDao.buscarPorEstado("Pendiente").get(0));
 
     }
 
@@ -127,7 +127,7 @@ public class TurnoDaoTest {
     public void buscarPorParticularExisteTest() {
         Turno turno1 = new Turno(1, paciente1, medico1,true,"Pendiente");
         turnoDao.registrar(turno1);
-        assertEquals(turno1, turnoDao.buscarPorParticular(true));
+        assertEquals(turno1, turnoDao.buscarPorParticular(true).get(0));
 
     }
 
