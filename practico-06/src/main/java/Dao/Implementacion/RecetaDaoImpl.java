@@ -21,23 +21,31 @@ public class RecetaDaoImpl implements RecetaDAO {
     }
 
     @Override
-    public Receta buscarPorPaciente(Paciente paciente) {
+    public List<Receta> buscarPorPaciente(Paciente paciente) {
+        List<Receta> recetasPorPaciente = new ArrayList<>();
         for (Receta receta : recetas.values()) {
             if (receta.getPaciente().equals(paciente)) {
-                return receta;
+                recetasPorPaciente.add(receta);
             }
         }
-        throw new NoSuchElementException("No existe " + paciente.getNombre() + ".");
+        if (recetasPorPaciente.isEmpty()) {
+            throw new NoSuchElementException("No existe " + paciente.getNombre() + ".");
+        }
+        return recetasPorPaciente;
     }
 
     @Override
-    public Receta buscarPorMedico(Medico medico) {
+    public List<Receta> buscarPorMedico(Medico medico) {
+        List<Receta> recetasPorMedico = new ArrayList<>();
         for (Receta receta : recetas.values()) {
             if (receta.getMedico().equals(medico)) {
-                return receta;
+                recetasPorMedico.add(receta);
             }
         }
-        throw new NoSuchElementException("No existe " + medico.getNombre() + ".");
+        if (recetasPorMedico.isEmpty()) {
+            throw new NoSuchElementException("No existe " + medico.getNombre() + ".");
+        }
+        return recetasPorMedico;
     }
 
     @Override

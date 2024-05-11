@@ -22,25 +22,6 @@ public class RecetaDaoTest {
     List<ObraSocial> obrasSocialesAceptadasList2 = new ArrayList<>();
     List<ObraSocial> obrasSocialesAceptadasList3 = new ArrayList<>();
 
-    @BeforeEach
-    public void setUp() {
-        recetaDao = new RecetaDaoImpl();
-
-        medicamentosList1.add(medicamento1);
-        medicamentosList2.add(medicamento1);
-        medicamentosList2.add(medicamento2);
-        medicamentosList3.add(medicamento2);
-        medicamentosList3.add(medicamento3);
-
-        obrasSocialesAceptadasList1.add(osde);
-        obrasSocialesAceptadasList1.add(galeno);
-        obrasSocialesAceptadasList2.add(osde);
-        obrasSocialesAceptadasList2.add(sanCorSalud);
-        obrasSocialesAceptadasList3.add(osde);
-        obrasSocialesAceptadasList3.add(sanCorSalud);
-        obrasSocialesAceptadasList3.add(swissMedical);
-
-    }
     Especialidad dermatologia = new Especialidad(1,"Dermatologia");
     Especialidad pediatria = new Especialidad(2,"Pediatría");
     Especialidad oftalmologia = new Especialidad(3,"Oftalmología");
@@ -61,6 +42,26 @@ public class RecetaDaoTest {
     Medico medico1 = new Medico(1,"Juan","Perez",dermatologia,obrasSocialesAceptadasList1);
     Medico medico2 = new Medico(2,"Pedro","Gomez",pediatria,obrasSocialesAceptadasList2);
     Medico medico3 = new Medico(3,"Maria","Lopez",oftalmologia,obrasSocialesAceptadasList3);
+
+    @BeforeEach
+    public void setUp() {
+        recetaDao = new RecetaDaoImpl();
+
+        medicamentosList1.add(medicamento1);
+        medicamentosList2.add(medicamento1);
+        medicamentosList2.add(medicamento2);
+        medicamentosList3.add(medicamento2);
+        medicamentosList3.add(medicamento3);
+
+        obrasSocialesAceptadasList1.add(osde);
+        obrasSocialesAceptadasList1.add(galeno);
+        obrasSocialesAceptadasList2.add(osde);
+        obrasSocialesAceptadasList2.add(sanCorSalud);
+        obrasSocialesAceptadasList3.add(osde);
+        obrasSocialesAceptadasList3.add(sanCorSalud);
+        obrasSocialesAceptadasList3.add(swissMedical);
+
+    }
 
     @Test
     public void registrarYbucarTodosTest() {
@@ -89,7 +90,7 @@ public class RecetaDaoTest {
     public void buscarPorPacienteExisteTest() {
         Receta receta1 = new Receta(1,medicamentosList1,medico1,paciente1);
         recetaDao.registrar(receta1);
-        assertEquals(receta1, recetaDao.buscarPorPaciente(paciente1));
+        assertEquals(receta1, recetaDao.buscarPorPaciente(paciente1).get(0));
 
     }
 
@@ -106,7 +107,7 @@ public class RecetaDaoTest {
     public void buscarPorMedicoExisteTest() {
         Receta receta1 = new Receta(1,medicamentosList1,medico1,paciente1);
         recetaDao.registrar(receta1);
-        assertEquals(receta1, recetaDao.buscarPorMedico(medico1));
+        assertEquals(receta1, recetaDao.buscarPorMedico(medico1).get(0));
 
     }
 
