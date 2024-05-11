@@ -58,6 +58,13 @@ public class GestionTurnoServiceTest {
     void listarEspecialidadesFueraDeRangoTest() {
         Mockito.when(contenedorMemoria.getEspecialidadDao().listarTodos()).thenReturn(Collections.emptyList());
 
+        assertThrows(RuntimeException.class, () -> gestionTurnoService.listarEspecialidades());
+    }
+
+    @Test
+    void listarEspecialidadesVaciaTest() {
+        Mockito.when(contenedorMemoria.getEspecialidadDao().listarTodos()).thenReturn(Collections.emptyList());
+
         ByteArrayInputStream in = new ByteArrayInputStream("4".getBytes());
         System.setIn(in);
         try {
@@ -66,6 +73,7 @@ public class GestionTurnoServiceTest {
             assertEquals("Número de especialidad inválido", e.getMessage());
         }
     }
+
 
 
     @Test
