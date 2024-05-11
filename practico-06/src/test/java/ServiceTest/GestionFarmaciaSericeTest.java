@@ -60,7 +60,7 @@ public class GestionFarmaciaSericeTest {
     }
 
     @Test
-    public void compraMedicamentosConTurnoFinalizadoStockInsuficienteTest() throws Exception {
+    public void compraMedicamentosConTurnoFinalizadoStockSuficienteTest() throws Exception {
         Especialidad dermatologia = new Especialidad(1,"Dermatologia");
 
         ObraSocial osde = new ObraSocial(1,"OSDE");
