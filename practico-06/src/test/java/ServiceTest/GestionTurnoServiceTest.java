@@ -144,6 +144,31 @@ public class GestionTurnoServiceTest {
     }
 
     @Test
+    void listarMedicosPorEspecialidadNumeroInvalidoTest() {
+        Especialidad dermatologia = new Especialidad(1,"Dermatologia");
+
+        ObraSocial osde = new ObraSocial(1,"OSDE");
+        ObraSocial sanCorSalud = new ObraSocial(2,"SanCorSalud");
+        List<ObraSocial> obrasSocialesAceptadasList = Arrays.asList(osde, sanCorSalud);
+
+        Paciente paciente = new Paciente(1,"Juan","Perez",osde);
+        Medico medico1 = new Medico(1,"Juan","Perez",dermatologia,obrasSocialesAceptadasList);
+        Medico medico2 = new Medico(2,"Pedro","Gomez",dermatologia,obrasSocialesAceptadasList);
+        List<Medico> medicos = Arrays.asList(medico1, medico2);
+
+        Mockito.when(contenedorMemoria.getMedicoDao().buscarPorEspecialidad(dermatologia)).thenReturn(medicos);
+
+        ByteArrayInputStream in = new ByteArrayInputStream("40".getBytes());
+        System.setIn(in);
+
+        try {
+            gestionTurnoService.listarMedicosPorEspecialidad(dermatologia, paciente, false);
+        } catch (RuntimeException e) {
+            assertEquals("Número de especialidad inválido", e.getMessage());
+        }
+    }
+
+    @Test
     void crearUnTurnoTest() {
         Especialidad dermatologia = new Especialidad(1,"Dermatologia");
 
