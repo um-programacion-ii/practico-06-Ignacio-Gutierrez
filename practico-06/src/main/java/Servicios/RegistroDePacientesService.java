@@ -2,10 +2,13 @@ package Servicios;
 
 import Dao.Implementacion.PacienteDaoImpl;
 import Entidades.ContenedorMemoria;
+import Entidades.ObraSocial;
 import Entidades.Paciente;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 public class RegistroDePacientesService {
     private static RegistroDePacientesService instancia;
@@ -38,6 +41,29 @@ public class RegistroDePacientesService {
         } catch (NoSuchElementException e) {
             throw new NoSuchElementException(apellido + ", " + nombre + " no se encuentra registrado en el sistema.");
         }
+    }
+
+    public ObraSocial seleccionarObraSocial() {
+        List<ObraSocial> todasLasObrasSociales = contenedorMemoria.getObraSocialDao().listarTodos();
+
+        for (int i = 0; i < todasLasObrasSociales.size(); i++) {
+            System.out.println((i + 1) + ". " + todasLasObrasSociales.get(i).getNombre());
+        }
+
+        Scanner scanner = new Scanner(System.in);
+        int indiceSeleccionado = -1;
+
+        while (indiceSeleccionado < 0 || indiceSeleccionado >= todasLasObrasSociales.size()) {
+            System.out.println("Por favor, ingrese el número de la obra social que posee:");
+            try {
+                indiceSeleccionado = scanner.nextInt() - 1;
+            } catch (InputMismatchException e) {
+                System.out.println("Por favor, ingrese un número válido.");
+                scanner.nextLine();
+            }
+        }
+
+        return todasLasObrasSociales.get(indiceSeleccionado);
     }
 
     public void registrarPaciente(Paciente pacienteNuevo) {

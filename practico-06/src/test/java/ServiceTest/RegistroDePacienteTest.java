@@ -2,9 +2,11 @@ package ServiceTest;
 
 import Dao.Implementacion.PacienteDaoImpl;
 import Dao.Interfaces.EspecialidadDAO;
+import Dao.Interfaces.ObraSocialDAO;
 import Dao.Interfaces.PacienteDAO;
 import Entidades.ContenedorMemoria;
 import Entidades.Especialidad;
+import Entidades.ObraSocial;
 import Entidades.Paciente;
 import Servicios.RegistroDePacientesService;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,7 +17,10 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 
 import org.mockito.Mockito;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.Arrays;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 public class RegistroDePacienteTest {
@@ -27,8 +32,10 @@ public class RegistroDePacienteTest {
         contenedorMemoria = Mockito.mock(ContenedorMemoria.class);
         EspecialidadDAO especialidadDAO = Mockito.mock(EspecialidadDAO.class);
         PacienteDAO pacienteDAO = Mockito.mock(PacienteDAO.class);
+        ObraSocialDAO obraSocialDAO = Mockito.mock(ObraSocialDAO.class);
         Mockito.when(contenedorMemoria.getEspecialidadDao()).thenReturn(especialidadDAO);
         Mockito.when(contenedorMemoria.getPacienteDao()).thenReturn(pacienteDAO);
+        Mockito.when(contenedorMemoria.getObraSocialDao()).thenReturn(obraSocialDAO);
         registroDePacientesService = RegistroDePacientesService.getInstancia(contenedorMemoria);
     }
 
@@ -93,6 +100,22 @@ public class RegistroDePacienteTest {
         Paciente resultado = registroDePacientesService.buscarPacientePorNombreYApellido("Juan", "Perez");
 
         assertEquals(paciente3, resultado);
+    }
+
+    @Test
+    public void seleccionarObraSocialTest() {
+        ObraSocial osde = new ObraSocial(1,"OSDE");
+        ObraSocial sanCorSalud = new ObraSocial(2,"SanCor Salud");
+        ObraSocial swissMedical = new ObraSocial(3,"Swiss Medical");
+
+        List<ObraSocial> todasLasObrasSociales = Arrays.asList(osde, sanCorSalud, swissMedical);
+
+        Mockito.when(contenedorMemoria.getObraSocialDao().listarTodos()).thenReturn(todasLasObrasSociales);
+
+        InputStream in = new ByteArrayInputStream("2\n".getBytes());
+        System.setIn(in);
+
+        Mockito.verify(Mockito.mock(ObraSocialDAO.class), Mockito.times(0)).registrar(Mockito.any(ObraSocial.class));
     }
 
     @Test
