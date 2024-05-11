@@ -95,7 +95,7 @@ public class GestionTurnoService {
     }
 
     public Turno darTurnoAPaciente(Paciente paciente, Medico medico, Boolean particular) {
-        int cantidadTurnos = contenedorMemoria.getTurnoDao().listarTodos().size();
+        int cantidadTurnos = contenedorMemoria.getTurnoDao().listarTodos().size() + 1;
 
         Turno turnoAAsignar = new Turno(cantidadTurnos,paciente, medico, particular, "Pendiente");
 

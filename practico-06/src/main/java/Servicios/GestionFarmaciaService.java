@@ -17,33 +17,34 @@ public class GestionFarmaciaService {
     public static GestionFarmaciaService getInstancia(ContenedorMemoria contenedorMemoria) {
         if (instancia == null) {
             instancia = new GestionFarmaciaService(contenedorMemoria);
+            instancia.gestionDrogueriaService = GestionDrogueriaService.getInstancia(contenedorMemoria);
         }
         return instancia;
     }
 
     public void compraDeMedicamentos(Receta receta, Turno turno) {
-        String esadoTurno = turno.getEstadoTurno();
-        List<Medicamento> medicamentos = receta.getMedicamentos();
-        if (esadoTurno == "Finalizada") {
-            for(Medicamento medicamento : medicamentos) {
+        String estadoTurno = turno.getEstadoTurno();
+        List<Medicamento> medicamentosRecetados = receta.getMedicamentos();
+        if (estadoTurno == "Finalizada") {
+            for(Medicamento medicamento : medicamentosRecetados) {
                 int cantidadARetirar = medicamento.getCantidad();
                 try {
                     contenedorMemoria.getMedicamentoDao().retirarCantidadPorId(medicamento.getId(), cantidadARetirar);
                 } catch (Exception e) {
                     System.out.println("No hay suficiente stock de " + medicamento.getNombre());
-                    System.out.println("Solicitando medicamento a drogueria...");
-                    gestionDrogueriaService.getInstancia(contenedorMemoria).solicitarMedicamentoPorId(medicamento.getId());
+                    System.out.println("Solicitando medicamento a droguería...");
+                    gestionDrogueriaService.solicitarMedicamentoPorId(medicamento.getId());
 
                     contenedorMemoria.getMedicamentoDao().retirarCantidadPorId(medicamento.getId(), cantidadARetirar);
-
+                } finally {
+                    System.out.println("Medicamento retirado: " + medicamento.getNombre());
                 }
             }
-            System.out.println("Compra de medicamentos realizada");
         } else {
             throw new RuntimeException("El turno no está finalizado");
         }
 
-        System.out.println("Iniciando compra...");
+        System.out.println("Compra finalizada...");
     }
 
 }
