@@ -73,8 +73,6 @@ public class MedicamentoDaoImpl implements MedicamentoDAO {
             } else {
                 throw new IllegalArgumentException("La cantidad a retirar es mayor que la cantidad disponible.");
             }
-        } else {
-            throw new NoSuchElementException("No se encontró ningún medicamento con el nombre especificado.");
         }
     }
 
@@ -84,8 +82,6 @@ public class MedicamentoDaoImpl implements MedicamentoDAO {
         if (medicamento != null) {
             int cantidadActual = medicamento.getCantidad();
             medicamento.setCantidad(cantidadActual + cantidad);
-        } else {
-            throw new NoSuchElementException("No se encontró ningún medicamento con el ID especificado.");
         }
     }
 
@@ -95,8 +91,6 @@ public class MedicamentoDaoImpl implements MedicamentoDAO {
         if (medicamento != null) {
             int cantidadActual = medicamento.getCantidad();
             medicamento.setCantidad(cantidadActual + cantidad);
-        } else {
-            throw new NoSuchElementException("No se encontró ningún medicamento con el nombre especificado.");
         }
     }
 

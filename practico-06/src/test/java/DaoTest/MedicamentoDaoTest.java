@@ -134,12 +134,55 @@ public class MedicamentoDaoTest {
     }
 
     @Test
+    public void retirarCantidadPorIdCantidadARetirarMayorTest() {
+        Medicamento medicamento1 = new Medicamento(1,"Paracetamol", 10);
+        medicamentoDao.registrar(medicamento1);
+        try {
+            medicamentoDao.retirarCantidadPorId(1, 15);
+        } catch (IllegalArgumentException e) {
+            assertEquals("La cantidad a retirar es mayor que la cantidad disponible.", e.getMessage());
+
+        }
+    }
+
+    @Test
+    public void retirarCantidadPorIdNoExisteTest() {
+        try {
+            medicamentoDao.retirarCantidadPorId(1, 5);
+        } catch (NoSuchElementException e) {
+            assertEquals("No se encontró ningún medicamento con el ID especificado.", e.getMessage());
+        }
+    }
+
+
+    @Test
     public void retirarCantidadPorNombreTest() {
         Medicamento medicamento1 = new Medicamento(1,"Paracetamol", 10);
         medicamentoDao.registrar(medicamento1);
         medicamentoDao.retirarCantidadPorNombre("Paracetamol", 5);
 
         assertEquals(5, medicamentoDao.buscarPorId(1).getCantidad());
+    }
+
+    @Test
+    public void retirarCantidadPorNombreCantidadARetirarMayorTest() {
+        Medicamento medicamento1 = new Medicamento(1,"Paracetamol", 10);
+        medicamentoDao.registrar(medicamento1);
+        try {
+            medicamentoDao.retirarCantidadPorNombre("Paracetamol",15);
+        } catch (IllegalArgumentException e) {
+            assertEquals("La cantidad a retirar es mayor que la cantidad disponible.", e.getMessage());
+
+        }
+    }
+
+    @Test
+    public void retirarCantidadPorNombreNoExisteTest() {
+        try {
+            medicamentoDao.retirarCantidadPorNombre("Paracetamol", 5);
+        } catch (NoSuchElementException e) {
+            assertEquals("No hay Paracetamol.", e.getMessage());
+        }
     }
 
     @Test
@@ -152,6 +195,16 @@ public class MedicamentoDaoTest {
     }
 
     @Test
+    public void agregarCantidadPorIdNoExisteTest() {
+        try {
+            medicamentoDao.agregarCantidadPorId(1, 5);
+        } catch (NoSuchElementException e) {
+            assertEquals("No se encontró ningún medicamento con el ID especificado.", e.getMessage());
+        }
+    }
+
+
+    @Test
     public void agregarCantidadPorNombreTest() {
         Medicamento medicamento1 = new Medicamento(1,"Paracetamol", 10);
         medicamentoDao.registrar(medicamento1);
@@ -159,4 +212,14 @@ public class MedicamentoDaoTest {
 
         assertEquals(15, medicamentoDao.buscarPorId(1).getCantidad());
     }
+
+    @Test
+    public void agregarCantidadPorNombreNoExisteTest() {
+        try {
+            medicamentoDao.agregarCantidadPorNombre("Paracetamol", 5);
+        } catch (NoSuchElementException e) {
+            assertEquals("No hay Paracetamol.", e.getMessage());
+        }
+    }
+
 }
