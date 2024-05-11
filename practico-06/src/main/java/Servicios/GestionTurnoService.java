@@ -42,6 +42,22 @@ public class GestionTurnoService {
         }
     }
 
+    public Boolean seleccionarTipoTurno() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Seleccione el tipo de turno:");
+        System.out.println("1 - Particular");
+        System.out.println("2 - Obra social");
+        int seleccion = scanner.nextInt();
+
+        if (seleccion == 1) {
+            return true;
+        } else if (seleccion == 2) {
+            return false;
+        } else {
+            throw new IllegalArgumentException("Número de selección inválido");
+        }
+    }
+
     public Medico listarMedicosPorEspecialidad(Especialidad especialidad, Paciente paciente, Boolean particular) {
         List<Medico> medicos = contenedorMemoria.getMedicoDao().buscarPorEspecialidad(especialidad);
         List<Medico> medicosFiltrados = new ArrayList<>();
@@ -57,13 +73,13 @@ public class GestionTurnoService {
                 }
             }
 
+            System.out.println("Seleccione un médico: ");
+
             for (int i = 0; i < medicosFiltrados.size(); i++) {
                 System.out.println((i + 1) + " - " + medicosFiltrados.get(i).getNombre() + " " + medicosFiltrados.get(i).getApellido());
             }
 
             Scanner scanner = new Scanner(System.in);
-            System.out.println("Seleccione un médico: ");
-            System.out.println("-Ingrese el número del médico-");
             int seleccion = scanner.nextInt();
 
             if (seleccion < 1 || seleccion > medicosFiltrados.size()) {
@@ -78,11 +94,13 @@ public class GestionTurnoService {
         return null;
     }
 
-    public void darTurnoAPaciente(Paciente paciente, Medico medico, Boolean particular) {
+    public Turno darTurnoAPaciente(Paciente paciente, Medico medico, Boolean particular) {
         int cantidadTurnos = contenedorMemoria.getTurnoDao().listarTodos().size();
 
         Turno turnoAAsignar = new Turno(cantidadTurnos,paciente, medico, particular, "Pendiente");
 
         contenedorMemoria.getTurnoDao().registrar(turnoAAsignar);
+
+        return turnoAAsignar;
     }
 }
