@@ -48,13 +48,17 @@ public class PacienteDaoImpl implements PacienteDAO {
     }
 
     @Override
-    public Paciente buscarPorObraSocial(ObraSocial obraSocial) {
+    public List<Paciente> buscarPorObraSocial(ObraSocial obraSocial) {
+        List<Paciente> pacientesConObraSocial = new ArrayList<>();
         for (Paciente paciente : pacientes.values()) {
             if (paciente.getObraSocial().equals(obraSocial)) {
-                return paciente;
+                pacientesConObraSocial.add(paciente);
             }
         }
-        throw new NoSuchElementException("No existe " + obraSocial.getNombre() + ".");
+        if (pacientesConObraSocial.isEmpty()) {
+            throw new NoSuchElementException("No existe " + obraSocial.getNombre() + ".");
+        }
+        return pacientesConObraSocial;
     }
 
     @Override

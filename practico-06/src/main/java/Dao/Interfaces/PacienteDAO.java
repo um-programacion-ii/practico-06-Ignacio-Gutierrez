@@ -10,5 +10,5 @@ public interface PacienteDAO extends DAO<Paciente>{
 
     List<Paciente> buscarPorApellido(String apellido);
 
-    Paciente buscarPorObraSocial(ObraSocial obraSocial);
+    List<Paciente> buscarPorObraSocial(ObraSocial obraSocial);
 }

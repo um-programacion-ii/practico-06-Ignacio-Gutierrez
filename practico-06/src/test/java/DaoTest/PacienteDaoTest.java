@@ -94,7 +94,7 @@ public class PacienteDaoTest {
     public void buscarPorObraSocialExisteTest() {
         Paciente paciente1 = new Paciente(1,"Juan","Perez",osde);
         pacienteDao.registrar(paciente1);
-        assertEquals(paciente1, pacienteDao.buscarPorObraSocial(osde));
+        assertEquals(paciente1, pacienteDao.buscarPorObraSocial(osde).get(0));
 
     }
 
