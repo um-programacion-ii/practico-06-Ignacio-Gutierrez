@@ -47,7 +47,7 @@ public class RegistroDePacientesService {
         List<ObraSocial> todasLasObrasSociales = contenedorMemoria.getObraSocialDao().listarTodos();
 
         for (int i = 0; i < todasLasObrasSociales.size(); i++) {
-            System.out.println((i + 1) + ". " + todasLasObrasSociales.get(i).getNombre());
+            System.out.println((i + 1) + " - " + todasLasObrasSociales.get(i).getNombre());
         }
 
         Scanner scanner = new Scanner(System.in);
