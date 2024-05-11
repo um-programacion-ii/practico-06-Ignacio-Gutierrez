@@ -1,15 +1,13 @@
 import Entidades.AppPrograma;
-import Entidades.ContenedorMemoria;
 
 public class Main {
     public static void main(String[] args) {
-        //ontenedorMemoria contenedorMemoria = new ContenedorMemoria();
 
         AppPrograma appPrograma = new AppPrograma();
+        appPrograma.iniciar();
 
-        System.out.println("\n|-------------------------------------|");
-        System.out.println("| Bienvendido/a al Servicio de Salud! |");
-        System.out.println("|-------------------------------------|");
+        appPrograma.logicaDelPrograma();
 
+        appPrograma.finalizar();
     }
 }
