@@ -33,16 +33,6 @@ public class GestionFarmaciaSericeTest {
         gestionFarmaciaService = GestionFarmaciaService.getInstancia(contenedorMemoria);
     }
 
-
-
-    @Test
-    void getInstanciaTest() {
-        GestionFarmaciaService instancia1 = GestionFarmaciaService.getInstancia(contenedorMemoria);
-        GestionFarmaciaService instancia2 = GestionFarmaciaService.getInstancia(contenedorMemoria);
-
-        assertSame(instancia1, instancia2);
-    }
-
     @Test
     public void compraMedicamentosSinIrAlTurnoTest() {
         Especialidad dermatologia = new Especialidad(1,"Dermatologia");
@@ -69,4 +59,35 @@ public class GestionFarmaciaSericeTest {
         }
     }
 
+    @Test
+    public void compraMedicamentosConTurnoFinalizadoStockInsuficienteTest() throws Exception {
+        Especialidad dermatologia = new Especialidad(1,"Dermatologia");
+
+        ObraSocial osde = new ObraSocial(1,"OSDE");
+        ObraSocial swissMedical = new ObraSocial(2,"Swiss Medical");
+        List<ObraSocial> obrasSocialesAceptadasList = Arrays.asList(osde, swissMedical);
+
+        Medicamento medicamento1 = new Medicamento(1,"Ibuprofeno", 10);
+
+        List<Medicamento> medicamentos = Arrays.asList(medicamento1);
+
+        Paciente paciente = new Paciente(1,"Juan","Perez",osde);
+        Medico medico1 = new Medico(1,"Juan","Perez",dermatologia,obrasSocialesAceptadasList);
+
+        Turno turno = new Turno(1, paciente, medico1, false, "Finalizada");
+
+        Receta receta = new Receta(1, medicamentos, medico1, paciente);
+
+        gestionFarmaciaService.compraDeMedicamentos(receta, turno);
+
+        Mockito.verify(contenedorMemoria.getMedicamentoDao()).retirarCantidadPorId(1, 10);
+    }
+
+    @Test
+    void getInstanciaTest() {
+        GestionFarmaciaService instancia1 = GestionFarmaciaService.getInstancia(contenedorMemoria);
+        GestionFarmaciaService instancia2 = GestionFarmaciaService.getInstancia(contenedorMemoria);
+
+        assertSame(instancia1, instancia2);
+    }
 }
