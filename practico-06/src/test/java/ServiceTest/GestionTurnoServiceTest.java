@@ -1,6 +1,5 @@
 package ServiceTest;
 
-import Dao.Implementacion.TurnoDaoImpl;
 import Dao.Interfaces.EspecialidadDAO;
 import Dao.Interfaces.MedicoDAO;
 import Dao.Interfaces.TurnoDAO;
@@ -19,6 +18,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class GestionTurnoServiceTest {
     private GestionTurnoService gestionTurnoService;
@@ -65,6 +67,34 @@ public class GestionTurnoServiceTest {
         }
     }
 
+
+    @Test
+    void seleccionarTipoTurnoParticularTest() {
+        ByteArrayInputStream in = new ByteArrayInputStream("1\n".getBytes());
+        System.setIn(in);
+
+        Boolean resultado = gestionTurnoService.seleccionarTipoTurno();
+
+        assertTrue(resultado);
+    }
+
+    @Test
+    void seleccionarTipoTurnoObraSocialTest() {
+        ByteArrayInputStream in = new ByteArrayInputStream("2\n".getBytes());
+        System.setIn(in);
+
+        Boolean resultado = gestionTurnoService.seleccionarTipoTurno();
+
+        assertFalse(resultado);
+    }
+
+    @Test
+    void seleccionarTipoTurnoInvalidoTest() {
+        ByteArrayInputStream in = new ByteArrayInputStream("3\n".getBytes());
+        System.setIn(in);
+
+        assertThrows(IllegalArgumentException.class, () -> gestionTurnoService.seleccionarTipoTurno());
+    }
 
     @Test
     void listarMedicosPorEspecialidadNoExisteTest() {
