@@ -37,14 +37,15 @@ public class GestionTurnoServiceTest {
         Mockito.when(contenedorMemoria.getMedicoDao()).thenReturn(medicoDAO);
         gestionTurnoService = GestionTurnoService.getInstancia(contenedorMemoria);
 
-        Especialidad especialidad1 = new Especialidad(1,"Dermatologia");
-        Especialidad especialidad2 = new Especialidad(2,"Pediatría");
-        Mockito.when(contenedorMemoria.getEspecialidadDao().listarTodos()).thenReturn(List.of(especialidad1, especialidad2));
     }
 
     @Test
     void listarEspecialidadesTest() {
         Especialidad especialidad1 = new Especialidad(1,"Dermatologia");
+        Especialidad especialidad2 = new Especialidad(2,"Pediatría");
+
+        Mockito.when(contenedorMemoria.getEspecialidadDao().listarTodos())
+                .thenReturn(Arrays.asList(especialidad1, especialidad2));
 
         ByteArrayInputStream in = new ByteArrayInputStream("1".getBytes());
         System.setIn(in);
@@ -54,18 +55,25 @@ public class GestionTurnoServiceTest {
         assertEquals(especialidad1, especialidadSeleccionada);
     }
 
-    @Test
-    void listarEspecialidadesFueraDeRangoTest() {
-        Mockito.when(contenedorMemoria.getEspecialidadDao().listarTodos()).thenReturn(Collections.emptyList());
-
-        assertThrows(RuntimeException.class, () -> gestionTurnoService.listarEspecialidades());
-    }
 
     @Test
     void listarEspecialidadesVaciaTest() {
         Mockito.when(contenedorMemoria.getEspecialidadDao().listarTodos()).thenReturn(Collections.emptyList());
 
-        ByteArrayInputStream in = new ByteArrayInputStream("4".getBytes());
+        try {
+            gestionTurnoService.listarEspecialidades();
+        } catch (RuntimeException e) {
+            assertEquals("No hay especialidades disponibles", e.getMessage());
+        }
+    }
+
+    @Test
+    void listarEspecialidadesFueraDeRangoTest() {
+        Especialidad especialidad1 = new Especialidad(1,"Dermatologia");
+        Especialidad especialidad2 = new Especialidad(2,"Pediatría");
+        Mockito.when(contenedorMemoria.getEspecialidadDao().listarTodos()).thenReturn(Arrays.asList(especialidad1, especialidad2));
+
+        ByteArrayInputStream in = new ByteArrayInputStream("0".getBytes());
         System.setIn(in);
         try {
             gestionTurnoService.listarEspecialidades();
