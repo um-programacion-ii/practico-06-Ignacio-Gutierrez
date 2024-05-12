@@ -87,7 +87,7 @@ public class RegistroDePacienteTest {
     }
 
     @Test
-    public void buscarPacienteNoExisteException1Test() {
+    public void buscarPacienteNoExisteNadieTest() {
         Mockito.when(contenedorMemoria.getPacienteDao().buscarPorNombre("Juan"))
                 .thenThrow(new NoSuchElementException("No existe Juan."));
         Mockito.when(contenedorMemoria.getPacienteDao().buscarPorApellido("Perez"))
@@ -101,7 +101,7 @@ public class RegistroDePacienteTest {
     }
 
     @Test
-    public void buscarPacienteNoExisteException2Test() {
+    public void buscarPacienteNoExisteElBuscadoTest() {
         Paciente paciente1 = new Paciente(1, "Juan", "Gomez", null);
         Paciente paciente2 = new Paciente(2, "Nicolas", "Perez", null);
         Paciente paciente3 = new Paciente(3, "Juan", "Perez", null);
