@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnit;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -118,6 +119,14 @@ public class RegistroDePacienteTest {
         }
     }
 
+    @Test
+    public void registrarPacienteTest() {
+        Paciente paciente1 = new Paciente(1, "Juan", "Gomez", null);
+
+        registroDePacientesService.registrarPaciente(paciente1);
+
+        Mockito.verify(contenedorMemoria.getPacienteDao(), Mockito.times(1)).registrar(paciente1);
+    }
 
 
     @Test
