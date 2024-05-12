@@ -46,6 +46,10 @@ public class RegistroDePacientesService {
     public ObraSocial seleccionarObraSocial() {
         List<ObraSocial> todasLasObrasSociales = contenedorMemoria.getObraSocialDao().listarTodos();
 
+        if (todasLasObrasSociales.isEmpty()) {
+            throw new IllegalStateException("No hay obras sociales disponibles.");
+        }
+
         for (int i = 0; i < todasLasObrasSociales.size(); i++) {
             System.out.println((i + 1) + " - " + todasLasObrasSociales.get(i).getNombre());
         }
@@ -55,11 +59,12 @@ public class RegistroDePacientesService {
 
         while (indiceSeleccionado < 0 || indiceSeleccionado >= todasLasObrasSociales.size()) {
             System.out.println("Por favor, ingrese el número de la obra social que posee:");
+            String input = scanner.nextLine();
+
             try {
-                indiceSeleccionado = scanner.nextInt() - 1;
-            } catch (InputMismatchException e) {
+                indiceSeleccionado = Integer.parseInt(input) - 1;
+            } catch (NumberFormatException e) {
                 System.out.println("Por favor, ingrese un número válido.");
-                scanner.nextLine();
             }
         }
 
