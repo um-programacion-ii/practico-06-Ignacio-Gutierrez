@@ -131,6 +131,17 @@ public class RegistroDePacienteTest {
     }
 
     @Test
+    public void seleccionarObraSocialNoHayObraSocialTest() {
+        Mockito.when(contenedorMemoria.getObraSocialDao().listarTodos())
+                .thenReturn(Arrays.asList());
+        try {
+            registroDePacientesService.seleccionarObraSocial();
+        } catch (IllegalStateException e) {
+            assertEquals("No hay obras sociales disponibles.", e.getMessage());
+        }
+    }
+
+    @Test
     public void seleccionarObraSocialTest() {
         ObraSocial osde = new ObraSocial(1, "OSDE");
         ObraSocial swissMedical = new ObraSocial(2, "Swiss Medical");
