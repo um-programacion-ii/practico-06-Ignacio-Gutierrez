@@ -82,6 +82,19 @@ public class GestionTurnoServiceTest {
     }
 
     @Test
+    void listarEspecialidadesSinEspecialidadesTest() {
+        Mockito.when(contenedorMemoria.getEspecialidadDao().listarTodos())
+                .thenReturn(Collections.emptyList());
+
+        try {
+            gestionTurnoService.listarEspecialidades();
+        } catch (RuntimeException e) {
+            assertEquals("No hay especialidades disponibles", e.getMessage());
+        }
+    }
+
+
+    @Test
     void seleccionarTipoTurnoParticularTest() {
         ByteArrayInputStream in = new ByteArrayInputStream("1\n".getBytes());
         System.setIn(in);
