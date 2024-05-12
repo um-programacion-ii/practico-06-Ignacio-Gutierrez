@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.io.ByteArrayInputStream;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,7 +20,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class GestionTurnoServiceCasoATest {
+public class GestionTurnoServiceTest {
     private GestionTurnoService gestionTurnoService;
     private ContenedorMemoria contenedorMemoria;
 
@@ -29,16 +30,20 @@ public class GestionTurnoServiceCasoATest {
         EspecialidadDAO especialidadDAO = Mockito.mock(EspecialidadDAO.class);
         MedicoDAO medicoDAO = Mockito.mock(MedicoDAO.class);
         TurnoDAO turnoDAO = Mockito.mock(TurnoDAO.class);
+
         Mockito.when(contenedorMemoria.getEspecialidadDao()).thenReturn(especialidadDAO);
         Mockito.when(contenedorMemoria.getTurnoDao()).thenReturn(turnoDAO);
         Mockito.when(contenedorMemoria.getMedicoDao()).thenReturn(medicoDAO);
+
+        try {
+            Field instanciaField = GestionTurnoService.class.getDeclaredField("instancia");
+            instanciaField.setAccessible(true);
+            instanciaField.set(null, null);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
         gestionTurnoService = GestionTurnoService.getInstancia(contenedorMemoria);
-
-        Especialidad especialidad1 = new Especialidad(1,"Dermatologia");
-        Especialidad especialidad2 = new Especialidad(2,"Pediatría");
-
-        Mockito.when(contenedorMemoria.getEspecialidadDao().listarTodos())
-                .thenReturn(Arrays.asList(especialidad1, especialidad2));
 
     }
 
@@ -59,8 +64,6 @@ public class GestionTurnoServiceCasoATest {
         assertEquals(especialidad1, especialidadSeleccionada);
     }
 
-
-
     @Test
     void listarEspecialidadesFueraDeRangoTest() {
         Especialidad especialidad1 = new Especialidad(1,"Dermatologia");
@@ -77,7 +80,6 @@ public class GestionTurnoServiceCasoATest {
             assertEquals("Número de especialidad inválido", e.getMessage());
         }
     }
-
 
     @Test
     void seleccionarTipoTurnoParticularTest() {
