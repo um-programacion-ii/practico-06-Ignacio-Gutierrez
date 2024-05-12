@@ -4,6 +4,7 @@ import Dao.Interfaces.EspecialidadDAO;
 import Dao.Interfaces.ObraSocialDAO;
 import Dao.Interfaces.PacienteDAO;
 import Entidades.ContenedorMemoria;
+import Entidades.ObraSocial;
 import Entidades.Paciente;
 import Servicios.RegistroDePacientesService;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
 
+import java.io.ByteArrayInputStream;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
@@ -128,6 +130,21 @@ public class RegistroDePacienteTest {
         Mockito.verify(contenedorMemoria.getPacienteDao(), Mockito.times(1)).registrar(paciente1);
     }
 
+    @Test
+    public void seleccionarObraSocialTest() {
+        ObraSocial osde = new ObraSocial(1, "OSDE");
+        ObraSocial swissMedical = new ObraSocial(2, "Swiss Medical");
+
+        Mockito.when(contenedorMemoria.getObraSocialDao().listarTodos())
+                .thenReturn(Arrays.asList(osde, swissMedical));
+
+        ByteArrayInputStream in = new ByteArrayInputStream("1".getBytes());
+        System.setIn(in);
+
+        ObraSocial resultado = registroDePacientesService.seleccionarObraSocial();
+
+        assertEquals(osde, resultado);
+    }
 
     @Test
     public void getInstanciaTest() {
