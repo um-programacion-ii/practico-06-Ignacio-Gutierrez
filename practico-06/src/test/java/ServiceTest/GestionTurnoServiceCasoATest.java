@@ -8,6 +8,7 @@ import Servicios.GestionTurnoService;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import org.mockito.Mockito;
 
 import java.io.ByteArrayInputStream;
@@ -16,13 +17,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class GestionTurnoServiceTest {
+public class GestionTurnoServiceCasoATest {
     private GestionTurnoService gestionTurnoService;
     private ContenedorMemoria contenedorMemoria;
 
@@ -37,15 +34,18 @@ public class GestionTurnoServiceTest {
         Mockito.when(contenedorMemoria.getMedicoDao()).thenReturn(medicoDAO);
         gestionTurnoService = GestionTurnoService.getInstancia(contenedorMemoria);
 
-    }
-
-    @Test
-    void listarEspecialidadesTest() {
         Especialidad especialidad1 = new Especialidad(1,"Dermatologia");
         Especialidad especialidad2 = new Especialidad(2,"Pediatría");
 
         Mockito.when(contenedorMemoria.getEspecialidadDao().listarTodos())
                 .thenReturn(Arrays.asList(especialidad1, especialidad2));
+
+    }
+
+
+    @Test
+    void listarEspecialidadesTest() {
+        Especialidad especialidad1 = new Especialidad(1,"Dermatologia");
 
         ByteArrayInputStream in = new ByteArrayInputStream("1".getBytes());
         System.setIn(in);
@@ -56,23 +56,9 @@ public class GestionTurnoServiceTest {
     }
 
 
-    @Test
-    void listarEspecialidadesVaciaTest() {
-        Mockito.when(contenedorMemoria.getEspecialidadDao().listarTodos()).thenReturn(Collections.emptyList());
-
-        try {
-            gestionTurnoService.listarEspecialidades();
-        } catch (RuntimeException e) {
-            assertEquals("No hay especialidades disponibles", e.getMessage());
-        }
-    }
 
     @Test
     void listarEspecialidadesFueraDeRangoTest() {
-        Especialidad especialidad1 = new Especialidad(1,"Dermatologia");
-        Especialidad especialidad2 = new Especialidad(2,"Pediatría");
-        Mockito.when(contenedorMemoria.getEspecialidadDao().listarTodos()).thenReturn(Arrays.asList(especialidad1, especialidad2));
-
         ByteArrayInputStream in = new ByteArrayInputStream("0".getBytes());
         System.setIn(in);
         try {
@@ -81,7 +67,6 @@ public class GestionTurnoServiceTest {
             assertEquals("Número de especialidad inválido", e.getMessage());
         }
     }
-
 
 
     @Test
