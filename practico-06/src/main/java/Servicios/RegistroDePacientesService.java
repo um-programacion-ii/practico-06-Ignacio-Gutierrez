@@ -1,11 +1,9 @@
 package Servicios;
 
-import Dao.Implementacion.PacienteDaoImpl;
 import Entidades.ContenedorMemoria;
 import Entidades.ObraSocial;
 import Entidades.Paciente;
 
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;

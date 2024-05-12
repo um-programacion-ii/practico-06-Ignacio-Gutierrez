@@ -13,9 +13,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnit;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
@@ -155,6 +155,26 @@ public class RegistroDePacienteTest {
         ObraSocial resultado = registroDePacientesService.seleccionarObraSocial();
 
         assertEquals(osde, resultado);
+    }
+
+    @Test
+    public void seleccionarObraSocialInputNoIntTest() {
+        ObraSocial osde = new ObraSocial(1, "OSDE");
+        ObraSocial swissMedical = new ObraSocial(2, "Swiss Medical");
+
+        Mockito.when(contenedorMemoria.getObraSocialDao().listarTodos())
+                .thenReturn(Arrays.asList(osde, swissMedical));
+
+        ByteArrayInputStream in = new ByteArrayInputStream("asd\n1\n".getBytes());
+        System.setIn(in);
+
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new java.io.PrintStream(out));
+
+        registroDePacientesService.seleccionarObraSocial();
+
+        assertTrue(out.toString().contains("Por favor, ingrese un número válido."));
+        assertTrue(out.toString().contains("Por favor, ingrese el número de la obra social que posee:"));
     }
 
     @Test
