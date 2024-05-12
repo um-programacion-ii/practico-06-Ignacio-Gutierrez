@@ -46,6 +46,10 @@ public class GestionTurnoServiceCasoATest {
     @Test
     void listarEspecialidadesTest() {
         Especialidad especialidad1 = new Especialidad(1,"Dermatologia");
+        Especialidad especialidad2 = new Especialidad(2,"Pediatría");
+
+        Mockito.when(contenedorMemoria.getEspecialidadDao().listarTodos())
+                .thenReturn(Arrays.asList(especialidad1, especialidad2));
 
         ByteArrayInputStream in = new ByteArrayInputStream("1".getBytes());
         System.setIn(in);
@@ -59,6 +63,12 @@ public class GestionTurnoServiceCasoATest {
 
     @Test
     void listarEspecialidadesFueraDeRangoTest() {
+        Especialidad especialidad1 = new Especialidad(1,"Dermatologia");
+        Especialidad especialidad2 = new Especialidad(2,"Pediatría");
+
+        Mockito.when(contenedorMemoria.getEspecialidadDao().listarTodos())
+                .thenReturn(Arrays.asList(especialidad1, especialidad2));
+
         ByteArrayInputStream in = new ByteArrayInputStream("0".getBytes());
         System.setIn(in);
         try {
